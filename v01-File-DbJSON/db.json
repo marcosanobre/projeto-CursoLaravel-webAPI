@@ -76,6 +76,69 @@
       "url": "https://www.youtube.com/embed/j9p7jlPFvk0?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
       "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
       "id": "nZDdi8d"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #12 - Introdução a migrations",
+      "descricao": "3 mil visualizações",
+      "url": "https://www.youtube.com/embed/GsMNL4P9YI4?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "16yCseO"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #13 - Criando models",
+      "descricao": "4 mil visualizações",
+      "url": "https://www.youtube.com/embed/8pcFJ4-iTBQ?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "a3fOXTt"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #14 - Seeders e factories",
+      "descricao": "1 mil visualizações",
+      "url": "https://www.youtube.com/embed/MZ7mNIft1XQ?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "wDAI1CK"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #15 - Introdução ao Eloquent - Pegando registros",
+      "descricao": "1 mil visualizações",
+      "url": "https://www.youtube.com/embed/p-vkHYfH3mc?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "zra9rVM"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #16 - Introdução ao Eloquent - Salvando registros",
+      "descricao": "5 mil visualizações",
+      "url": "https://www.youtube.com/embed/_xWj5bulbH0?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "_c-2SBQ"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #17 - Introdução ao Eloquent - Atualizando registros",
+      "descricao": "6 mil visualizações",
+      "url": "https://www.youtube.com/embed/HV14qNvrwLI?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "ZiQtRfp"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #18 - Introdução ao Eloquent - Deletando registros",
+      "descricao": "9 mil visualizações",
+      "url": "https://www.youtube.com/embed/SjQLgxwqh7k?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "vGpKFSY"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #19 - Relacionamento 1 para N",
+      "descricao": "2 mil visualizações",
+      "url": "https://www.youtube.com/embed/9ARRTSBp6P8?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "VFgjgtV"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #20 - Relacionamento N para 1",
+      "descricao": "0 mil visualizações",
+      "url": "https://www.youtube.com/embed/kdmK38Eo0ew?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "bi98d55"
     }
   ]
 }
