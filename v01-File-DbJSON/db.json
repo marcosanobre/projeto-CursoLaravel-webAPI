@@ -1,0 +1,81 @@
+{
+  "videos": [
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #1 - Introdução e instalação",
+      "descricao": "2 mil visualizações",
+      "url": "https://www.youtube.com/embed/_h7pq2uc6e4?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "56slkfn"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #2 - O comando Artisan",
+      "descricao": "2 mil visualizações",
+      "url": "https://www.youtube.com/embed/q3TYbWaSOqY?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "0ctdJAa"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #3 - Criando rotas parte 1",
+      "descricao": "2 mil visualizações",
+      "url": "https://www.youtube.com/embed/0IX7IgqIIe0?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "iiYXb7g"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #4 - Criando rotas parte 2",
+      "descricao": "6 mil visualizações",
+      "url": "https://www.youtube.com/embed/hMZHocLHwsk?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "YD_EwYW"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #5 - A camada request",
+      "descricao": "7 mil visualizações",
+      "url": "https://www.youtube.com/embed/cAyzFcB_8Jw?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "8hxhndw"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #6 - Criando controller e linkando com as rotas",
+      "descricao": "0 mil visualizações",
+      "url": "https://www.youtube.com/embed/isChgZfN27k?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "1WRHgAj"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #7 - Renderizando views",
+      "descricao": "3 mil visualizações",
+      "url": "https://www.youtube.com/embed/Dpgv2RylSB4?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "p5jGFyT"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #8 - Diretivas do blade template",
+      "descricao": "0 mil visualizações",
+      "url": "https://www.youtube.com/embed/dxY-x6e5jPE?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "XUcEjXW"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #9 - Criando layouts com blade template",
+      "descricao": "6 mil visualizações",
+      "url": "https://www.youtube.com/embed/meaRFfy5cdI?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "khd5ret"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #10 - Injetando assets (css e javascript)",
+      "descricao": "6 mil visualizações",
+      "url": "https://www.youtube.com/embed/8M5JuB6Qgx0?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "6lAbwL9"
+    },
+    {
+      "titulo": "Curso gratuito Laravel 9 INTRO #11 - Compilando assets (Laravel mix)",
+      "descricao": "5 mil visualizações",
+      "url": "https://www.youtube.com/embed/j9p7jlPFvk0?list=PLcoYAcR89n-reidRFA3XCIvQPeKFt4dQU",
+      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "id": "nZDdi8d"
+    }
+  ]
+}

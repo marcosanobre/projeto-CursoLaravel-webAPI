@@ -1,0 +1,11 @@
+{
+  "name": "projeto-cursolaravel-youtube",
+  "version": "1.0.0",
+  "description": "versao 01 - Projeto Curso-Php do Tiago Neves - db.json",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcos Nobre",
+  "license": "ISC"
+}
