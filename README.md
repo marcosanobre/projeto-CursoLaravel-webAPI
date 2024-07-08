@@ -1,4 +1,4 @@
-# projeto-CursoLaravel-v01-File-DbJson
+# projeto: CursoLaravel - webAPI NodeJS
 
 ----------------------------------------------------------------
 Projeto: Este projeto exemplifica uma SPA escrita em NodeJS que 
