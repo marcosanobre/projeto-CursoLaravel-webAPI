@@ -7,7 +7,7 @@ Projeto: Este projeto exemplifica uma SPA escrita em NodeJS que
          Curso de Laravel do Thiago Matos
 
 Há varias versões de repositório de dados que a API faz conexão<br>
-v01 - Json Datafile
-v02 - PostgreSQL Database
-v03 - MySQL Database
-v04 - PostgreSQL Database
+v01 - Json Datafile<br>
+v02 - PostgreSQL Database<br>
+v03 - MySQL Database<br>
+v04 - PostgreSQL Database + Sequelize-ORM<br>
