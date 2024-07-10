@@ -34,8 +34,25 @@ body {
     z-index: 2;
 }
 
+.combobox {
+    border: 1px solid #000;
+    padding-right: 1.25em; /* deixa espaço para ▾ */
+    display: block;     /* Permite margin/border/padding/size */
+    width: 30.25em;
+    color: #154580;
+    cursor: pointer; /* Utiliza o ponteiro em forma de seta em vez de I-beam */
+    nav-index: 0; /* Define tabindex, não-funcional na maioria dos browsers */
+}
+
+.label_combobox {
+    color: var(--azul-medio);
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+}
+
 .logo {
-    background-image: url(../img/cabecalho/ThiagoMatos.jpg);
+    /* background-image: url(../img/cabecalho/ThiagoMatos.jpg); */
     background-repeat: no-repeat;
     padding: 65px 65px;
     cursor: pointer;

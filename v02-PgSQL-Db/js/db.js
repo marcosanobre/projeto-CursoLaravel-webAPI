@@ -1,34 +1,20 @@
-// Definindo uma CONNECTION por meio
-// da criação de um Connection-Pool
 
-async function conexao() {
-    if (global.connection)
-        return global.connection.connect();
- 
-    const { Pool } = require('pg');
-    const pool = new Pool({
-        connectionString: process.env.CONNECTION_STRING
-    });
- 
-    //apenas testando a conexão
-    const client = await pool.connect();
-    console.log("Criou pool de conexões no PostgreSQL!");
- 
-    const res = await client.query('SELECT NOW()');
-    console.log(res.rows[0]);
-    client.release();
- 
-    //guardando para usar sempre o mesmo
-    global.connection = pool;
-    return pool.connect();
-}
- 
-conexao();
+import { conectaBanco } from "./conectaBanco.js";
+
+// -----------------------------------------------------------------
+// Métodos de Manipulação de Dados
+// ( equivalente a uma MODEL::Grupos )
+// -----------------------------------------------------------------
+async function selectGrupos( client ) {
+    //const client = await conectaBanco.conexao();
+    const resultado = await client.query( 'select id, titulo from grupo_videocurso;' );
+    return resultado.rows;
+};
 
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados
-// ( equivalente a uma MODEL::Clientes )
+// ( equivalente a uma MODEL::Videos )
 // -----------------------------------------------------------------
 
 async function selectClientes() {
@@ -64,7 +50,8 @@ async function excluiCliente(id) {
 };
 
 
-module.exports = {
+export const db = {
+    selectGrupos,
     selectClientes,
     selectCliente,
     insereCliente,

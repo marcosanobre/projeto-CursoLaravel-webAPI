@@ -1,25 +1,3 @@
-// Carregar biblioteca de Configuração de App
-require("dotenv").config();
-
-// Carregar o frmwrk EXPRESS
-const express = require("express");
-
-// Inicializar o frmwrk
-const app = express();
-
-// Configuração de conversão de Body
-// serialização e deserialização de Objeto
-// Json => Objeto => Json
-app.use( express.json() );
-
-// Configurar o EntryPoint
-// listener na porta 3000
-app.listen( process.env.PORT, () => {
-    console.log( 'App now is running !' );
-} );
-
-// Inclui configurador de Banco
-const db = require('./db.js');
 
 
 // -----------------------------------------------------------------

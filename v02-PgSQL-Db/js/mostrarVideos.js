@@ -1,4 +1,25 @@
-import { conectaApi } from "./conectaApi.js";
+
+import { conectaBanco } from "./conectaBanco.js";
+
+import { db } from "./db.js";
+
+const clientDB = conectaBanco.conexao();
+
+const componenteSelect = document.getElementById("combobox_grupo");
+function carregaSelect( clientDB ) {
+    const grupos = db.selectGrupos( clientDB );
+    console.log(grupos);
+/* 
+    grupos.forEach( (grupo) => {
+        const htmlOption = document.createElement('option');
+        htmlOption.value = grupo->id;
+        htmlOption.textContent = grupo->titulo;
+        componenteSelect.appendChild( htmlOption );
+    });
+
+ */
+};
+
 
 const lista = document.querySelector("[data-lista]");
 
@@ -33,5 +54,11 @@ async function listaVideos() {
     }
 };
 
-listaVideos();
+// listaVideos();
+
+carregaSelect( clientDB );
+
+
+
+
 
