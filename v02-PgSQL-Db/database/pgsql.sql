@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS video_cursos;
 
-CREATE DATABASE video_cursos WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'pt_BR.UTF-8';
+CREATE DATABASE video_cursos WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'pt_BR.UTF-8';
 
 \c video_cursos;
 
