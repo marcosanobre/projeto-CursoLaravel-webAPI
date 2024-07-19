@@ -1,5 +1,5 @@
 
-import { conectaBanco } from "./conectaBanco.js";
+//import { conectaBanco } from "./conectaBanco.js";
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados

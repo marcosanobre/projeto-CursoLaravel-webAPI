@@ -1,11 +1,10 @@
-
-import { conectaBanco } from "./conectaBanco.js";
+//const dbConn = require("./dbConn.js");
+import { dbConnection } from "./dbConn.js";
 
 import { db } from "./db.js";
 
-const clientDB = conectaBanco.conexao();
-
 const componenteSelect = document.getElementById("combobox_grupo");
+
 function carregaSelect( clientDB ) {
     const grupos = db.selectGrupos( clientDB );
     console.log(grupos);
@@ -56,7 +55,7 @@ async function listaVideos() {
 
 // listaVideos();
 
-carregaSelect( clientDB );
+carregaSelect( dbConnection );
 
 
 
