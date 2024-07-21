@@ -1,16 +1,6 @@
 
 //import { conectaBanco } from "./conectaBanco.js";
 
-// -----------------------------------------------------------------
-// Métodos de Manipulação de Dados
-// ( equivalente a uma MODEL::Grupos )
-// -----------------------------------------------------------------
-async function selectGrupos( client ) {
-    //const client = await conectaBanco.conexao();
-    const resultado = await client.query( 'select id, titulo from grupo_videocurso;' );
-    return resultado.rows;
-};
-
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados

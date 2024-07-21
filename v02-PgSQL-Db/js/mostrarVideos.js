@@ -1,24 +1,68 @@
-//const dbConn = require("./dbConn.js");
-import { dbConnection } from "./dbConn.js";
+// const dbConn = require("./dbConn.js");
+// import { dbConnection } from "./dbConn.js";
 
-import { db } from "./db.js";
+// import { db } from "./db.js";
+
+
+
+// -----------------------------------------------------------------
+// Métodos de Manipulação de Dados
+// ( equivalente a uma MODEL::GRUPOS )
+// -----------------------------------------------------------------
+function getGrupos() {
+    const urlFetchGrupos = 'http://localhost:3000/grupos';
+    fetch(urlFetchGrupos)
+        .then( (response) => {
+                return response.json();
+        })
+        .then( (grupos) => {
+            carregaComboBoxGrupos( grupos );
+        })
+        .catch(function() {
+            // handle the error
+        });
+};
 
 const componenteSelect = document.getElementById("combobox_grupo");
 
-function carregaSelect( clientDB ) {
-    const grupos = db.selectGrupos( clientDB );
-    console.log(grupos);
-/* 
+function carregaComboBoxGrupos( grupos ) {
+    const firstOption = document.createElement('option');
+    firstOption.selected = true;
+    firstOption.disabled = true;
+    firstOption.value = 0;
+    firstOption.textContent = 'Selecione o GRUPO de videos !!!';
+    componenteSelect.appendChild( firstOption );
     grupos.forEach( (grupo) => {
+        //console.log( grupo.id, grupo.titulo );
         const htmlOption = document.createElement('option');
-        htmlOption.value = grupo->id;
-        htmlOption.textContent = grupo->titulo;
+        htmlOption.value = grupo.id;
+        htmlOption.textContent = grupo.titulo;
         componenteSelect.appendChild( htmlOption );
     });
-
- */
 };
 
+getGrupos();
+componenteSelect.addEventListener( 'change', () => getVideosDoGrupo() )
+
+
+// -----------------------------------------------------------------
+// Métodos de Manipulação de Dados
+// ( equivalente a uma MODEL::VIDEOS )
+// -----------------------------------------------------------------
+function getVideosDoGrupo() {
+    const grupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
+    const urlFetchVideos = `http://localhost:3000/videos/${grupoSelecionado}`;
+    fetch(urlFetchVideos)
+        .then( (response) => {
+                return response.json();
+        })
+        .then( (videos) => {
+            carregaVideos( videos );
+        })
+        .catch(function() {
+            // handle the error
+        });
+}
 
 const lista = document.querySelector("[data-lista]");
 
@@ -39,25 +83,23 @@ export default function constroiCard( titulo, descricao, url, imagem ) {
     return video;
 };
 
-async function listaVideos() {
+function carregaVideos( videos ) {
+    // Limpa / Esvazia a biblioteca
+    // de videos, antes de preencher
+    while ( lista.firstChild ) {
+        lista.removeChild( lista.firstChild );
+    };
+
     try {
-        const listaApi = await conectaApi.listaVideos();
-        listaApi.forEach( elemento => lista.appendChild( constroiCard( 
-                                                                        elemento.titulo,
-                                                                        elemento.descricao,
-                                                                        elemento.url,
-                                                                        elemento.imagem 
-                                                                    ) ) );
+        videos.forEach( elemento => lista.appendChild( constroiCard( 
+                                                                       elemento.titulo,
+                                                                       elemento.descricao,
+                                                                       elemento.url,
+                                                                       elemento.imagem 
+                                                                   ) ) );
     } catch {
         lista.innerHTML = `<h2 class="mensagem__titulo__erro">Não foi possível carregar a lista de vídeos.</h2>`;
     }
 };
-
-// listaVideos();
-
-carregaSelect( dbConnection );
-
-
-
 
 

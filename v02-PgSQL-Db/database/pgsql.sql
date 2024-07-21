@@ -17,6 +17,7 @@ INSERT INTO grupo_videocurso ( titulo ) VALUES ('Php 8 - Segio L N Bastos'), ('L
 CREATE TABLE IF NOT EXISTS video_curso ( 
       id SERIAL NOT NULL CONSTRAINT pkey_videocurso PRIMARY KEY,
       titulo varchar(150) NOT NULL,
+      descricao varchar(150),
       url varchar(200) NOT NULL,
       imagem varchar(200), 
       codigo varchar(10),
@@ -275,11 +276,13 @@ VALUES ('{	"titulo":"Curso gratuito Laravel 9 INTRO #1 - Introdução e instala�
 	}' 
 );
 
-insert into video_curso (titulo, url, imagem, codigo, id_grupo) 
-	select 	videos->'titulo' titulo, 
-		videos->'url' url, 
-		videos->'imagem' imagem, 
-		videos->'codigo' codigo, 
+insert into video_curso (titulo, descricao, url, imagem, codigo, id_grupo) 
+	select 	videos->>'titulo' titulo, 
+                videos->>'descricao' descricao,
+		videos->>'url' url, 
+		videos->>'imagem' imagem, 
+		videos->>'codigo' codigo, 
 		2 as id_grupo
-	from video_aulas ; 
-	
+	from video_aulas ;
+
+

@@ -1,10 +1,5 @@
 
 
-// -----------------------------------------------------------------
-// Configuração de ROTAS
-// -----------------------------------------------------------------
-
-
 // Rota para Excluir Cliente
 app.delete('/clientes/:id', async (request, response) => {
     const id = parseInt(request.params.id);
