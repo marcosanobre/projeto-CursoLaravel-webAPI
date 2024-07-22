@@ -64,7 +64,7 @@ app.listen( process.env.PORT, () => {
 app.get('/grupos', async (___, res) => {
     try {
       const client = await pool.connect();
-      const query = 'SELECT * FROM grupo_videocurso;';
+      const query = 'SELECT * FROM grupo_videocurso ORDER BY id;';
       const { rows } = await client.query(query);
       res.status(200).json(rows);
     } catch (err) {

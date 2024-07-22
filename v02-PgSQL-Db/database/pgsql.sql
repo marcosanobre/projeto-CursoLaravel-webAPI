@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS grupo_videocurso (
         deleted_at timestamp without time zone
 );
 
-INSERT INTO grupo_videocurso ( titulo ) VALUES ('Php 8 - Segio L N Bastos'), ('Laravel 9 - Tiago Matos'), ('Node.JS - Luiz Duarte');
+INSERT INTO grupo_videocurso ( titulo ) VALUES ('Php 8 - Ronaldo Aires'), ('Laravel 9 - Tiago Matos'), ('Node.JS - Luiz Duarte');
 
 CREATE TABLE IF NOT EXISTS video_curso ( 
       id SERIAL NOT NULL CONSTRAINT pkey_videocurso PRIMARY KEY,

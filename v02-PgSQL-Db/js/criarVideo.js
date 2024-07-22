@@ -1,4 +1,11 @@
-import { conectaApi } from "./conectaApi.js";
+import { idGrupoSelecionado, txtGrupoSelecionado } from "./mostrarVideos.js";
+
+//import { baseData } from "./mostrarVideos.js";
+//const idGrupoSelecionado = require('./mostrarVideos.js');
+//const txtGrupoSelecionado = require('./mostrarVideos.js');
+//const {baseData} = require('./mostrarVideos.js');
+
+console.log('>>>>>>>>>>',txtGrupoSelecionado);
 
 const formulario = document.querySelector("[data-formulario]");
 

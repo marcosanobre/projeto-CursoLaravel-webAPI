@@ -1,9 +1,9 @@
-// const dbConn = require("./dbConn.js");
-// import { dbConnection } from "./dbConn.js";
-
-// import { db } from "./db.js";
-
-
+let idGrupoSelecionado = 0;
+let txtGrupoSelecionado = '';
+const componenteSelect = document.getElementById("combobox_grupo");
+document.addEventListener('DOMContentLoaded', function () {
+    componenteSelect?.addEventListener( 'click', (evt) => getVideosDoGrupo(evt), true );
+});
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados
@@ -23,8 +23,6 @@ function getGrupos() {
         });
 };
 
-const componenteSelect = document.getElementById("combobox_grupo");
-
 function carregaComboBoxGrupos( grupos ) {
     const firstOption = document.createElement('option');
     firstOption.selected = true;
@@ -42,21 +40,32 @@ function carregaComboBoxGrupos( grupos ) {
 };
 
 getGrupos();
-componenteSelect.addEventListener( 'change', () => getVideosDoGrupo() )
-
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados
 // ( equivalente a uma MODEL::VIDEOS )
 // -----------------------------------------------------------------
-function getVideosDoGrupo() {
-    const grupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
-    const urlFetchVideos = `http://localhost:3000/videos/${grupoSelecionado}`;
+function defineImagem( grupoSelecionado ) {
+    const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
+                (grupoSelecionado==2) ? 'url(../img/cabecalho/ThiagoMatos.jpg)' : 
+                (grupoSelecionado==3) ? 'url(../img/cabecalho/Logo.png)' : 'url()' ;
+    document.getElementById('imagem_grupo').style.backgroundImage = ret;
+}
+
+function getVideosDoGrupo(evento) {
+    evento.preventDefault();
+    // Recupera Grupo selecionado
+    idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
+    txtGrupoSelecionado= componenteSelect.options[componenteSelect.selectedIndex].textContent;
+    // Define imagem de acordo
+    defineImagem( idGrupoSelecionado );
+    const urlFetchVideos = `http://localhost:3000/videos/${idGrupoSelecionado}`;
     fetch(urlFetchVideos)
         .then( (response) => {
                 return response.json();
         })
         .then( (videos) => {
+            //componenteSelect.removeEventListener( 'click', getVideosDoGrupo, false); 
             carregaVideos( videos );
         })
         .catch(function() {
@@ -66,7 +75,7 @@ function getVideosDoGrupo() {
 
 const lista = document.querySelector("[data-lista]");
 
-export default function constroiCard( titulo, descricao, url, imagem ) {
+function constroiCard( titulo, descricao, url, imagem ) {
     const video = document.createElement('li');
     video.className = 'videos__item';
     video.innerHTML = `
@@ -102,4 +111,22 @@ function carregaVideos( videos ) {
     }
 };
 
+export { idGrupoSelecionado, txtGrupoSelecionado } ;
+
+
+
+/*
+exports.idGrupoSelecionado = idGrupoSelecionado;
+exports.txtGrupoSelecionado = txtGrupoSelecionado;
+
+module.exports = {
+    idGrupoSelecionado,
+    txtGrupoSelecionado
+};
+
+export const baseData = {
+    idGrupoSelecionado: idGrupoSelecionado,
+    txtGrupoSelecionado: txtGrupoSelecionado
+}
+*/
 
