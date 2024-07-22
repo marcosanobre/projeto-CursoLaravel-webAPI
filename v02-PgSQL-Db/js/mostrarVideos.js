@@ -1,9 +1,19 @@
-let idGrupoSelecionado = 0;
-let txtGrupoSelecionado = '';
 const componenteSelect = document.getElementById("combobox_grupo");
+/* 
 document.addEventListener('DOMContentLoaded', function () {
     componenteSelect?.addEventListener( 'click', (evt) => getVideosDoGrupo(evt), true );
 });
+*/
+
+/* 
+let idGrupoSelecionado = 0;
+let txtGrupoSelecionado = '';
+function atualizaGlobalVars( v1, v2 ){
+    idGrupoSelecionado = v1;
+    txtGrupoSelecionado = v2;
+}
+*/
+
 
 // -----------------------------------------------------------------
 // Métodos de Manipulação de Dados
@@ -37,6 +47,8 @@ function carregaComboBoxGrupos( grupos ) {
         htmlOption.textContent = grupo.titulo;
         componenteSelect.appendChild( htmlOption );
     });
+    componenteSelect?.addEventListener( 'change', (evt) => getVideosDoGrupo(evt), false );
+    //componenteSelect?.addEventListener( 'change', getVideosDoGrupo(), false );
 };
 
 getGrupos();
@@ -45,7 +57,7 @@ getGrupos();
 // Métodos de Manipulação de Dados
 // ( equivalente a uma MODEL::VIDEOS )
 // -----------------------------------------------------------------
-function defineImagem( grupoSelecionado ) {
+export default function defineImagem( grupoSelecionado ) {
     const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
                 (grupoSelecionado==2) ? 'url(../img/cabecalho/ThiagoMatos.jpg)' : 
                 (grupoSelecionado==3) ? 'url(../img/cabecalho/Logo.png)' : 'url()' ;
@@ -53,10 +65,11 @@ function defineImagem( grupoSelecionado ) {
 }
 
 function getVideosDoGrupo(evento) {
-    evento.preventDefault();
+    //evento.preventDefault();
     // Recupera Grupo selecionado
-    idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
-    txtGrupoSelecionado= componenteSelect.options[componenteSelect.selectedIndex].textContent;
+    const idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
+    //const txtGrupoSelecionado= componenteSelect.options[componenteSelect.selectedIndex].textContent;
+    // console.log(idGrupoSelecionado,txtGrupoSelecionado);
     // Define imagem de acordo
     defineImagem( idGrupoSelecionado );
     const urlFetchVideos = `http://localhost:3000/videos/${idGrupoSelecionado}`;
@@ -65,7 +78,8 @@ function getVideosDoGrupo(evento) {
                 return response.json();
         })
         .then( (videos) => {
-            //componenteSelect.removeEventListener( 'click', getVideosDoGrupo, false); 
+            const link2InsereVideo = document.getElementById("link_2_insertVideo");
+            link2InsereVideo.href = `./pages/enviar-video.html?gid=${idGrupoSelecionado}`
             carregaVideos( videos );
         })
         .catch(function() {
@@ -111,9 +125,7 @@ function carregaVideos( videos ) {
     }
 };
 
-export { idGrupoSelecionado, txtGrupoSelecionado } ;
-
-
+// export { idGrupoSelecionado, txtGrupoSelecionado } ;
 
 /*
 exports.idGrupoSelecionado = idGrupoSelecionado;

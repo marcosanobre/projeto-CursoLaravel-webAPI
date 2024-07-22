@@ -73,6 +73,20 @@ app.get('/grupos', async (___, res) => {
     }
 });
 
+app.get('/grupo/:id_grupo', async ( req, res) => {
+    try {
+        const id_grupo = parseInt(req.params.id_grupo);  
+        const client = await pool.connect();
+        const query = `SELECT titulo FROM grupo_videocurso WHERE id = ${id_grupo};`;
+        //console.log('>>>>>',query);
+        const { rows } = await client.query(query);
+        res.status(200).json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Problemas ao obter dados dos Grupos.');
+    }
+});
+
 
 // *****************************************************************
 // VIDEOS

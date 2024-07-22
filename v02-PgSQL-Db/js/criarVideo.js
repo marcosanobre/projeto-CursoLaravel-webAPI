@@ -1,11 +1,34 @@
-import { idGrupoSelecionado, txtGrupoSelecionado } from "./mostrarVideos.js";
+// Importação do metodo Default
+import { default as defineImagem } from "./mostrarVideos.js";
+
+
+//import { idGrupoSelecionado, txtGrupoSelecionado } from "./mostrarVideos.js";
 
 //import { baseData } from "./mostrarVideos.js";
 //const idGrupoSelecionado = require('./mostrarVideos.js');
 //const txtGrupoSelecionado = require('./mostrarVideos.js');
 //const {baseData} = require('./mostrarVideos.js');
 
-console.log('>>>>>>>>>>',txtGrupoSelecionado);
+const urlParams = new URLSearchParams(window.location.search);
+const idGrupoSelecionado = urlParams.get('gid');
+function grupoSelecionado( idGrupo ) {
+    const urlFetchGrupo = `http://localhost:3000/grupo/${idGrupo}`;
+    fetch(urlFetchGrupo)
+        .then( (response) => {
+                return response.json();
+        })
+        .then( (grupo) => {
+            const labelGrupo = document.getElementById("grupo_selecionado");
+            labelGrupo.innerHTML = grupo[0].titulo;
+            defineImagem(idGrupo);
+            return grupo[0].titulo;
+        })
+        .catch(function() {
+            // handle the error
+        });
+}
+const txtGrupoSelecionado = grupoSelecionado(idGrupoSelecionado);
+
 
 const formulario = document.querySelector("[data-formulario]");
 
