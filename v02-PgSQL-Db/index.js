@@ -97,7 +97,7 @@ app.get('/videos/:id_grupo', async ( req, res ) => {
     try {
       const id_grupo = parseInt(req.params.id_grupo);
       const client = await pool.connect();
-      const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo}`;
+      const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo} ORDER BY id ASC`;
       const { rows } = await client.query( query );
       res.status(200).json(rows);
     } catch (err) {
