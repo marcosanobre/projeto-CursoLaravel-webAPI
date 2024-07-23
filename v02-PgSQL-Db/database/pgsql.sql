@@ -367,5 +367,19 @@ insert into video_curso (titulo, url, tamanho_min, tamanho_ms, imagem, codigo, i
 	from video_aulas
 	where id > 34;
 
+/*
+select id, url, url as newurl, descricao from video_curso where id_grupo = 1 and id = 35 
+UNION
+select id, url, 'https://www.youtube.com/embed/'||substring( url, position('v=' in url)+2)||'?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9' as newurl, descricao 
+from video_curso where id_grupo = 1 and id >= 35 order by id asc;
+*/
+UPDATE video_curso 
+SET descricao = url,
+url = 'https://www.youtube.com/embed/'||substring( url, position('v=' in url)+2)||'?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9' 
+WHERE id_grupo = 1 and id >= 35;
+
+select id, url, descricao from video_curso where id_grupo = 1 and id >= 35 order by id asc;
+/*
+*/
 
 

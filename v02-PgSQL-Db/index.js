@@ -1,4 +1,4 @@
-// Carregar biblioteca de Configuração de App
+// Carregar biblioteca de Configuração de App 
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -105,6 +105,14 @@ app.get('/videos/:id_grupo', async ( req, res ) => {
       res.status(500).send( `Problemas ao obter dados dos Videos do Grupo(${id_grupo}).` );
     }
 });
+
+
+
+
+
+
+
+
 
 
 /* 
