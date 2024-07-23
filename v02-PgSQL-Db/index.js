@@ -19,9 +19,9 @@ app.use( cors() );
 
 // Definindo uma CONNECTION por meio
 // da criação de um Connection-Pool
-//async function conexao() {
-//    if (global.connection)
-//        return global.connection.connect();
+async function conexao() {
+    if (global.connection)
+        return global.connection.connect();
  
     const { Pool } = require('pg');
     const pool = new Pool({
@@ -39,9 +39,9 @@ app.use( cors() );
     */
 
     //guardando para usar sempre o mesmo
-//    global.connection = pool;
-//    return await pool.connect();
-//}
+    global.connection = pool;
+    return await pool.connect();
+}
 
 // Configurar o EntryPoint
 // listener na porta 3000
@@ -63,7 +63,8 @@ app.listen( process.env.PORT, () => {
 // não é usado
 app.get('/grupos', async (___, res) => {
     try {
-      const client = await pool.connect();
+      //const client = await pool.connect();
+      const client = await conexao();
       const query = 'SELECT * FROM grupo_videocurso ORDER BY id;';
       const { rows } = await client.query(query);
       res.status(200).json(rows);
@@ -76,7 +77,7 @@ app.get('/grupos', async (___, res) => {
 app.get('/grupo/:id_grupo', async ( req, res) => {
     try {
         const id_grupo = parseInt(req.params.id_grupo);  
-        const client = await pool.connect();
+        const client = await conexao();
         const query = `SELECT titulo FROM grupo_videocurso WHERE id = ${id_grupo};`;
         //console.log('>>>>>',query);
         const { rows } = await client.query(query);
@@ -96,7 +97,7 @@ app.get('/grupo/:id_grupo', async ( req, res) => {
 app.get('/videos/:id_grupo', async ( req, res ) => {
     try {
       const id_grupo = parseInt(req.params.id_grupo);
-      const client = await pool.connect();
+      const client = await conexao();
       const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo} ORDER BY id ASC`;
       const { rows } = await client.query( query );
       res.status(200).json(rows);
@@ -106,12 +107,32 @@ app.get('/videos/:id_grupo', async ( req, res ) => {
     }
 });
 
-
-
-
-
-
-
+// post Video no GRUPO
+app.post('/video/:id_grupo', async ( req, res ) => {
+    try {
+        const dbConn = await conexao();
+        const id_grupo = req.params.id_grupo;
+        const video = req.body;
+        const descr = '[' + video.codigo + ' / ' + video.playlist_id + '] ' + video.descricao;
+        const sql = 'INSERT INTO video_curso (titulo,url,codigo,imagem,tamanho_min,tamanho_ms,descricao,id_grupo) VALUES ($1,$2,$3,$4,$5,$6,$7,$8);'
+        const valores = [ video.titulo,
+                        video.url, 
+                        video.codigo, 
+                        video.imagem, 
+                        video.tamanho_min, 
+                        video.tamanho_ms, 
+                        descr,
+                        id_grupo
+                        ];
+        //console.log(valores);
+        await dbConn.query( sql, valores );
+        // resposta universal de sucesso de inclusao
+        res.sendStatus(201);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send( `Problemas ao gravar dados de Video do Grupo(${id_grupo}).` );
+    }
+});
 
 
 

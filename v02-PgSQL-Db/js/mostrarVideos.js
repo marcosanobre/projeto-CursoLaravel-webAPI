@@ -1,9 +1,17 @@
 const componenteSelect = document.getElementById("combobox_grupo");
-
 /* 
 document.addEventListener('DOMContentLoaded', function () {
     componenteSelect?.addEventListener( 'click', (evt) => getVideosDoGrupo(evt), true );
 });
+*/
+
+/* 
+let idGrupoSelecionado = 0;
+let txtGrupoSelecionado = '';
+function atualizaGlobalVars( v1, v2 ){
+    idGrupoSelecionado = v1;
+    txtGrupoSelecionado = v2;
+}
 */
 
 
@@ -57,7 +65,7 @@ export default function defineImagem( grupoSelecionado ) {
 }
 
 function getVideosDoGrupo(evento) {
-    //evento.preventDefault();
+    evento.preventDefault();
     // Recupera Grupo selecionado
     const idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
     // Define imagem de acordo

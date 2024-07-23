@@ -26,9 +26,9 @@
                 <span class="label_combobox" id="grupo_selecionado"></span>
             </div>
 
-            <div class="cabecalho__icones">
+            <!-- div class="cabecalho__icones">
                 <a href="./enviar-video.html" class="cabecalho__videos"></a>
-            </div>
+            </div -->
         </nav>
 
     </header>
@@ -38,29 +38,54 @@
         <form class="container__formulario" data-formulario>
             <h2 class="formulario__titulo">Cadastre/Insira um vídeo, no Grupo !</h2>
 
-                <div class="formulario__campo">
-                    <label class="campo__etiqueta" for="url">Link embed</label>
-                    <input name="url" class="campo__escrita" required
-                        placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' data-url/>
-                </div>
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="titulo">Titulo do Vídeo</label>
+                <input name="titulo" class="campo__escrita" required 
+                       placeholder="Neste campo, dê o nome do vídeo"
+                       id='titulo' data-titulo/>
+            </div>
 
-                <div class="formulario__campo">
-                    <label class="campo__etiqueta" for="titulo">Titulo do vídeo</label>
-                    <input name="titulo" class="campo__escrita" required placeholder="Neste campo, dê o nome do vídeo"
-                        id='titulo' data-titulo/>
-                </div>
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="url">Link embed (https://www.youtube.com/embed/VIDEO-ID?list=PLAYLIST-ID)</label>
+                <input name="url" class="campo__escrita" required
+                        placeholder="Ex: https://www.youtube.com/embed/tEx9MQuPB4w?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9"
+                        id='url' data-url/>
+            </div>
 
-                <div class="formulario__campo">
-                    <label class="campo__etiqueta" for="imagem">Imagem de perfil</label>
-                    <input name="imagem" class="campo__escrita" required placeholder="Insira a url da imagem"
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="video_id">Video ID</label>
+                <input  name="video_id" class="campo__escrita"  
+                        placeholder="Exemplo: tEx9MQuPB4w"
+                        id='video_id' data-video-id/>
+                <label class="campo__etiqueta" for="playlist_id">PlayList ID</label>
+                <input  name="playlist_id" class="campo__escrita"  
+                        placeholder="Exemplo: PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9"
+                        id='playlist_id' data-playlist-id/>
+            </div>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="imagem">Imagem do card do Vídeo</label>
+                <input  name="imagem" class="campo__escrita" required 
+                        placeholder="Insira a url da imagem"
                         id='imagem' data-imagem/>
-                </div>
+            </div>
 
-                <div class="formulario__campo">
-                    <!-- button class="formulario__botao" type="submit">Enviar vídeo</button -->
-                    <a  class="formulario__botao" href="http://localhost:5500/index.html">Cancela</a>
-                    <input class="formulario__botao" type="submit" />
-                </div>
+            <div class="formulario__campo">
+                    <label class="campo__etiqueta" for="tamanho_min">Tamanho do Vídeo (Insira a duração em minutos)</label>
+                    <input  name="tamanho_min" class="campo__escrita"  
+                            placeholder="mm:ss minutos"
+                            id='tamanho_min' data-tamanho-min/>
+                    <label class="campo__etiqueta" for="tamanho_ms">Tamanho do Vídeo (Insira a duração em milisegundos)</label>
+                    <input  name="tamanho_ms" class="campo__escrita"  
+                            placeholder="99999 milisegundos"
+                            id='tamanho_ms' data-tamanho-ms/>
+            </div>
+
+            <div class="formulario__campo">
+                <!-- button class="formulario__botao" type="submit">Enviar vídeo</button -->
+                <a  class="formulario__botao" href="http://localhost:5500/index.html">Cancela</a>
+                <input class="formulario__botao" type="submit" />
+            </div>
         </form>
 
     </main>
