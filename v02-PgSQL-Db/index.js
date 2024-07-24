@@ -79,7 +79,6 @@ app.get('/grupo/:id_grupo', async ( req, res) => {
         const id_grupo = parseInt(req.params.id_grupo);  
         const client = await conexao();
         const query = `SELECT titulo FROM grupo_videocurso WHERE id = ${id_grupo};`;
-        //console.log('>>>>>',query);
         const { rows } = await client.query(query);
         res.status(200).json(rows);
     } catch (err) {
@@ -114,7 +113,9 @@ app.post('/video/:id_grupo', async ( req, res ) => {
         const id_grupo = req.params.id_grupo;
         const video = req.body;
         const descr = '[' + video.codigo + ' / ' + video.playlist_id + '] ' + video.descricao;
-        const sql = 'INSERT INTO video_curso (titulo,url,codigo,imagem,tamanho_min,tamanho_ms,descricao,id_grupo) VALUES ($1,$2,$3,$4,$5,$6,$7,$8);'
+        const sql = 'INSERT INTO video_curso ' + 
+                    '(titulo,url,codigo,imagem,tamanho_min,tamanho_ms,descricao,id_grupo) ' +
+                    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
         const valores = [ video.titulo,
                         video.url, 
                         video.codigo, 

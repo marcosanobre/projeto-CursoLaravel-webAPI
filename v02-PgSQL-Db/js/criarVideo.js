@@ -67,7 +67,8 @@ async function criarVideo( evento ) {
         throw new Error("Não foi possível gravar/inserir vídeo !!!");
     };
 
-    return postVideo.json();
+    window.location.href = `../pages/envio-concluido.html?${idGrupoSelecionado}`;
+    //return postVideo.json();
 };
 
 formulario.addEventListener( "submit", evento => criarVideo( evento ) );

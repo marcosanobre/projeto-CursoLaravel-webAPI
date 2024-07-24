@@ -60,7 +60,7 @@ getGrupos();
 export default function defineImagem( grupoSelecionado ) {
     const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
                 (grupoSelecionado==2) ? 'url(../img/cabecalho/ThiagoMatos.jpg)' : 
-                (grupoSelecionado==3) ? 'url(../img/cabecalho/Logo.png)' : 'url()' ;
+                (grupoSelecionado==3) ? 'url(../img/cabecalho/LuizDuarte.jpg)' : 'url()' ;
     document.getElementById('imagem_grupo').style.backgroundImage = ret;
 }
 
