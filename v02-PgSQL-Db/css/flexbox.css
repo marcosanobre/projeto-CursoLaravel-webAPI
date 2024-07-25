@@ -28,6 +28,30 @@
 
 /* grid vídeos */
 
+.video-acoes__container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    z-index: 1;
+    padding: 10px 5px 10px 5px;
+}
+
+a.link-acoes:link, a.link-acoes:visited, a.link-acoes:active {
+    text-decoration: none;
+    font-size: 70%;
+    cursor: pointer;
+}
+
+a.link-acoes:hover {
+    text-decoration: underline overline;
+    color: #f00;
+    background: #ff0;
+    font-size: 90%;
+    cursor: pointer;
+}
+
 .descricao-video {
     margin-top: 1rem;
     display: grid;

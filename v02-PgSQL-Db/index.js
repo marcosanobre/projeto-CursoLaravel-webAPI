@@ -63,7 +63,6 @@ app.listen( process.env.PORT, () => {
 // não é usado
 app.get('/grupos', async (___, res) => {
     try {
-      //const client = await pool.connect();
       const client = await conexao();
       const query = 'SELECT * FROM grupo_videocurso ORDER BY id;';
       const { rows } = await client.query(query);
@@ -76,7 +75,7 @@ app.get('/grupos', async (___, res) => {
 
 app.get('/grupo/:id_grupo', async ( req, res) => {
     try {
-        const id_grupo = parseInt(req.params.id_grupo);  
+        const id_grupo = req.params.id_grupo;  
         const client = await conexao();
         const query = `SELECT titulo FROM grupo_videocurso WHERE id = ${id_grupo};`;
         const { rows } = await client.query(query);
@@ -92,10 +91,25 @@ app.get('/grupo/:id_grupo', async ( req, res) => {
 // VIDEOS
 // *****************************************************************
 
+// get Video BY ID
+app.get('/video/:id', async ( req, res ) => {
+    try {
+      const id = req.params.id;
+      const client = await conexao();
+      const query = `SELECT * FROM video_curso WHERE id = ${id};`;
+      const { row } = await client.query( query );
+      console.log('>>>>',row);
+      res.status(200).json(row);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send( `Problemas ao obter dados dos Videos do Grupo(${id_grupo}).` );
+    }
+});
+
 // get Videos do GRUPO
 app.get('/videos/:id_grupo', async ( req, res ) => {
     try {
-      const id_grupo = parseInt(req.params.id_grupo);
+      const id_grupo = req.params.id_grupo;
       const client = await conexao();
       const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo} ORDER BY id ASC`;
       const { rows } = await client.query( query );
@@ -135,6 +149,46 @@ app.post('/video/:id_grupo', async ( req, res ) => {
     }
 });
 
+// PATCH Video no GRUPO
+app.patch('/video/:id', async ( req, res ) => {
+    try {
+        const dbConn = await conexao();
+        const idVideo = req.params.id;
+        const video = req.body;
+        const descr = ! video.descricao ? 
+                      '[' + video.codigo + ' / ' + video.playlist_id + '] ' + Math.floor( Math.random() * 10 ).toString() + '  mil visualizações'
+                      : video.descricao;
+        const ctsp = (new Date()).toJSON();
+        const sql = 'UPDATE video_curso ' + 
+                    'SET titulo         = $1, ' +
+                         'url           = $2, ' +
+                         'codigo        = $3, ' +
+                         'imagem        = $4, ' +
+                         'tamanho_min   = $5, ' +
+                         'tamanho_ms    = $6, ' +
+                         'descricao     = $7  ' +
+                         'updated_at    = $8'
+                    'WHERE id           = $9;' ;
+        const valores= [ 
+                         video.titulo,
+                         video.url, 
+                         video.codigo, 
+                         video.imagem, 
+                         video.tamanho_min, 
+                         video.tamanho_ms, 
+                         descr,
+                         ctsp,
+                         idVideo
+                       ];
+        //console.log(valores);
+        await dbConn.query( sql, valores );
+        // resposta universal de sucesso de inclusao
+        res.sendStatus(201);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send( `Problemas ao gravar dados de Video do Video(${idVideo}).` );
+    }
+});
 
 
 /* 
