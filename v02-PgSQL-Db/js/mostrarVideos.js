@@ -1,17 +1,9 @@
 const componenteSelect = document.getElementById("combobox_grupo");
-/* 
+
+/*  Retardar o registro do Evento CLICK
 document.addEventListener('DOMContentLoaded', function () {
     componenteSelect?.addEventListener( 'click', (evt) => getVideosDoGrupo(evt), true );
 });
-*/
-
-/* 
-let idGrupoSelecionado = 0;
-let txtGrupoSelecionado = '';
-function atualizaGlobalVars( v1, v2 ){
-    idGrupoSelecionado = v1;
-    txtGrupoSelecionado = v2;
-}
 */
 
 
@@ -70,14 +62,16 @@ function getVideosDoGrupo(evento) {
     const idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
     // Define imagem de acordo
     defineImagem( idGrupoSelecionado );
+    // Define a URL de Inserir Video
+    const link2InsereVideo = document.getElementById("link_2_insertVideo");
+    link2InsereVideo.href = `./pages/inserir-video.html?gid=${idGrupoSelecionado}`
+    // Pega os Videos
     const urlFetchVideos = `http://localhost:3000/videos/${idGrupoSelecionado}`;
     fetch(urlFetchVideos)
         .then( (response) => {
                 return response.json();
         })
         .then( (videos) => {
-            const link2InsereVideo = document.getElementById("link_2_insertVideo");
-            link2InsereVideo.href = `./pages/enviar-video.html?gid=${idGrupoSelecionado}`
             carregaVideos( videos );
         })
         .catch(function() {
@@ -87,7 +81,7 @@ function getVideosDoGrupo(evento) {
 
 const lista = document.querySelector("[data-lista]");
 
-function constroiCard( titulo, descricao, url, imagem ) {
+function constroiCard( id, titulo, descricao, url, imagem ) {
     const video = document.createElement('li');
     video.className = 'videos__item';
     video.innerHTML = `
@@ -95,6 +89,10 @@ function constroiCard( titulo, descricao, url, imagem ) {
             title="${titulo}" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
+        <div class="video-acoes__container">
+            <a class="link-acoes" href="http://localhost:5500/pages/excluir-video.html?exc=${id}" id="a-link-excluivideo">Exclui</a>
+            <a class="link-acoes" href="http://localhost:5500/pages/alterar-video.html?alt=${id}" id="a-link-alteravideo">Altera</a>
+        </div>
         <div class="descricao-video">
             <img src="${imagem}" alt="logo canal alura">
             <h3>${titulo}</h3>
@@ -110,14 +108,17 @@ function carregaVideos( videos ) {
     while ( lista.firstChild ) {
         lista.removeChild( lista.firstChild );
     };
-
+    // Dispoe Videos na página 
     try {
-        videos.forEach( elemento => lista.appendChild( constroiCard( 
-                                                                       elemento.titulo,
-                                                                       elemento.descricao,
-                                                                       elemento.url,
-                                                                       elemento.imagem 
-                                                                   ) ) );
+        //console.log(videos);
+        videos.forEach( 
+            (elemento) => lista.appendChild( 
+                constroiCard(   elemento.id,
+                                elemento.titulo,
+                                elemento.descricao,
+                                elemento.url,
+                                elemento.imagem 
+                            ) ) );
     } catch {
         lista.innerHTML = `<h2 class="mensagem__titulo__erro">Não foi possível carregar a lista de vídeos.</h2>`;
     }

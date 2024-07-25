@@ -3,7 +3,6 @@ import { default as defineImagem } from "./mostrarVideos.js";
 
 
 //import { idGrupoSelecionado, txtGrupoSelecionado } from "./mostrarVideos.js";
-
 //import { baseData } from "./mostrarVideos.js";
 //const idGrupoSelecionado = require('./mostrarVideos.js');
 //const txtGrupoSelecionado = require('./mostrarVideos.js');
@@ -19,7 +18,6 @@ function grupoSelecionado( idGrupo ) {
             const labelGrupo = document.getElementById("grupo_selecionado");
             labelGrupo.innerHTML = grupo[0].titulo;
             defineImagem(idGrupo);
-            return grupo[0].titulo;
         })
         .catch(function() {
             // handle the error
@@ -28,8 +26,7 @@ function grupoSelecionado( idGrupo ) {
 
 const urlParams = new URLSearchParams(window.location.search);
 const idGrupoSelecionado = urlParams.get('gid');
-const txtGrupoSelecionado = grupoSelecionado(idGrupoSelecionado);
-
+grupoSelecionado(idGrupoSelecionado);
 
 const formulario = document.querySelector("[data-formulario]");
 
@@ -73,47 +70,4 @@ async function criarVideo( evento ) {
 
 formulario.addEventListener( "submit", evento => criarVideo( evento ) );
 
-/* 
-
-    async function criaVideo(titulo,descricao,url,imagem) {
-    };
-    
-    fetch(urlFetchVideos)
-        .then( (response) => {
-                return response.json();
-        })
-        .then( (videos) => {
-            const link2InsereVideo = document.getElementById("link_2_insertVideo");
-            link2InsereVideo.href = `./pages/enviar-video.html?gid=${idGrupoSelecionado}`
-            carregaVideos( videos );
-        })
-        .catch(function() {
-            // handle the error
-        });
-
-    try {
-        await conectaApi.criaVideo( titulo, descricao, url, imagem);
-
-        window.location.href = "../pages/envio-concluido.html";            
-    } catch (e) {
-        alert(e);
-    };
-};
-
-document.querySelector("[data-formulario]").addEventListener( "Submit", async function( event ) {
-    event.preventDefault();
-
-    const titulo = document.querySelector('#titulo').value;
-    const descricao = document.querySelector('#descricao').value;
-    const url = document.querySelector('#url').value;
-    const imagem = document.querySelector('#imagem').value;
-
-    await conectaApi.criaVideo(titulo, descricao, url, imagem);
-
-    window.location.href = "/";
-
-    }
-);
-
-*/
 

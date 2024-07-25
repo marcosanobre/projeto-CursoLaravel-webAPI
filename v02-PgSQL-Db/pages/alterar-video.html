@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-form.css">
+    <link rel="stylesheet" href="../css/flexbox.css">
+    <title>Biblioteca de Video-Cursos</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Cabecalho -->
+    <header>
+
+        <nav class="cabecalho">
+            <a class="logo" href="./index.html" id="imagem_grupo"></a>
+            
+            <div class="cabecalho__pesquisar">
+                <span class="label_combobox">Categoria / Grupo: </span>
+                <span class="label_combobox" id="grupo_selecionado"></span>
+            </div>
+
+            <div class="cabecalho__icones">
+                <!-- a href="" class="cabecalho__videos"></a -->
+            </div>
+        </nav>
+
+    </header>
+
+    <main class="container">
+
+        <form class="container__formulario" data-formulario>
+            <h2 class="formulario__titulo">Altere os metadados do Vídeo !</h2>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="titulo">Titulo do Vídeo</label>
+                <input name="titulo" class="campo__escrita" required 
+                       placeholder="Neste campo, dê o nome do vídeo"
+                       id='titulo' data-titulo/>
+            </div>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="url">Link embed</label>
+                <input name="url" class="campo__escrita" required
+                        id='url' data-url/>
+            </div>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="video_id">Video ID</label>
+                <input  name="video_id" class="campo__escrita"  
+                        id='video_id' data-video-id/>
+                <label class="campo__etiqueta" for="playlist_id">PlayList ID</label>
+                <input  name="playlist_id" class="campo__escrita"  
+                        id='playlist_id' data-playlist-id/>
+            </div>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="imagem">Imagem do card do Vídeo</label>
+                <input  name="imagem" class="campo__escrita" required 
+                        id='imagem' data-imagem/>
+            </div>
+
+            <div class="formulario__campo">
+                    <label class="campo__etiqueta" for="tamanho_min">Tamanho do Vídeo (Insira a duração em minutos)</label>
+                    <input  name="tamanho_min" class="campo__escrita"  
+                            placeholder="mm:ss minutos"
+                            id='tamanho_min' data-tamanho-min/>
+                    <label class="campo__etiqueta" for="tamanho_ms">Tamanho do Vídeo (Insira a duração em milisegundos)</label>
+                    <input  name="tamanho_ms" class="campo__escrita"  
+                            placeholder="99999 milisegundos"
+                            id='tamanho_ms' data-tamanho-ms/>
+            </div>
+
+            <div class="formulario__campo">
+                <label class="campo__etiqueta" for="descricao">Link embed</label>
+                <input name="descricao" class="campo__escrita" required
+                        id='descricao' data-descricao/>
+            </div>
+
+            <div class="formulario__campo">
+                <a  class="formulario__botao" href="http://localhost:5500/index.html">Cancela</a>
+                <input class="formulario__botao" type="submit" />
+            </div>
+        </form>
+
+    </main>
+
+    <script src="../js/alterarVideo.js" type="module"></script>
+</body>
+
+</html>
