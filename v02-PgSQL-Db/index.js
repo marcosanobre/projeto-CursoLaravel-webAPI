@@ -92,17 +92,16 @@ app.get('/grupo/:id_grupo', async ( req, res) => {
 // *****************************************************************
 
 // get Video BY ID
-app.get('/video/:id', async ( req, res ) => {
+app.get('/video/:id_video', async ( req, res ) => {
     try {
-      const id = req.params.id;
-      const client = await conexao();
-      const query = `SELECT * FROM video_curso WHERE id = ${id};`;
-      const { row } = await client.query( query );
-      console.log('>>>>',row);
-      res.status(200).json(row);
+        const idVideo = req.params.id_video;
+        const dbConn = await conexao();
+        const query = `SELECT * FROM video_curso WHERE id = ${idVideo};`;
+        const { rows } = await dbConn.query( query );
+        res.status(200).json(rows);
     } catch (err) {
-      console.error(err);
-      res.status(500).send( `Problemas ao obter dados dos Videos do Grupo(${id_grupo}).` );
+        console.error(err);
+        res.status(500).send( `Problemas ao obter dados dos Videos do Grupo(${rows.id_grupo}).` );
     }
 });
 

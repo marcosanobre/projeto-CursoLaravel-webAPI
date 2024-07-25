@@ -1,15 +1,15 @@
 // Importação do metodo Default
-import { default as defineImagem } from "./mostrarVideos.js";
+import { default as defineImagem } from "./comum.js";
 
-function getVideo(id) {
+function getVideo(idVideo) {
     // Pega os Videos
-    const urlFetchVideo = `http://localhost:3000/video/${id}`;
+    const urlFetchVideo = `http://127.0.0.1:3000/video/${idVideo}`;
     fetch(urlFetchVideo)
         .then( (response) => {
                 return response.json();
         })
         .then( (video) => {
-console.log(video);
+console.log('---------------------->>>>>>>>', video);
             carregaVideo( video );
         })
         .catch(function() {
@@ -18,7 +18,7 @@ console.log(video);
 }
 
 function grupoDoVideo( idGrupo ) {
-    const urlFetchGrupo = `http://localhost:3000/grupo/${idGrupo}`;
+    const urlFetchGrupo = `http://127.0.0.1:3000/grupo/${idGrupo}`;
     fetch(urlFetchGrupo)
         .then( (response) => {
                 return response.json();
@@ -26,7 +26,7 @@ function grupoDoVideo( idGrupo ) {
         .then( (grupo) => {
             const labelGrupo = document.getElementById("grupo_selecionado");
             labelGrupo.innerHTML = grupo[0].titulo;
-            defineImagem(idGrupo);
+            document.getElementById('imagem_grupo').style.backgroundImage = defineImagem(idGrupo);
         })
         .catch(function() {
             // handle the error
@@ -42,12 +42,13 @@ let idGrupo = 0;
 const formulario = document.querySelector("[data-formulario]");
 
 function carregaVideo( video ) {
-console.log('******************',video);
+console.log('*********-------*********',video);
+    const playList = video.url.includes('?list=') ? video.url.slice( video.url.indexOf('=')+1 ) : '';
     // Dados do Form
     document.querySelector('[data-titulo]').value      = video.titulo     ;
     document.querySelector('[data-url]').value         = video.url        ;
-    document.querySelector('[data-video-id]').value    = video.video_id   ;
-    document.querySelector('[data-playlist-id]').value = video.playlist_id;
+    document.querySelector('[data-video-id]').value    = video.codigo     ;
+    document.querySelector('[data-playlist-id]').value = playList         ;
     document.querySelector('[data-imagem]').value      = video.imagem     ;
     document.querySelector('[data-tamanho-min]').value = video.tamanho_min;
     document.querySelector('[data-tamanho-ms]').value  = video.tamanho_ms ;
@@ -55,13 +56,13 @@ console.log('******************',video);
     // Recupera Grupo do Video
     idGrupo = video.id_grupo;    
     // Define Grupo
-    grupoDoVideo( idGrupo );
+    //grupoDoVideo( idGrupo );
 }
 
 async function gravaVideo (evento) {
     evento.preventDefault();
     // Invocando a API
-    const urlRotaGravaVideo = `http://localhost:3000/video/${idVideo}`;
+    const urlRotaGravaVideo = `http://127.0.0.1:3000/video/${idVideo}`;
     const postVideo = await fetch( urlRotaGravaVideo, {
         method: "PATCH",
         headers: {

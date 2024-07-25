@@ -9,7 +9,7 @@ import { default as defineImagem } from "./mostrarVideos.js";
 //const {baseData} = require('./mostrarVideos.js');
 
 function grupoSelecionado( idGrupo ) {
-    const urlFetchGrupo = `http://localhost:3000/grupo/${idGrupo}`;
+    const urlFetchGrupo = `http://127.0.0.1:3000/grupo/${idGrupo}`;
     fetch(urlFetchGrupo)
         .then( (response) => {
                 return response.json();
@@ -42,7 +42,7 @@ async function criarVideo( evento ) {
     const tamanho_ms = document.querySelector('[data-tamanho-ms]').value;
     const descricao = Math.floor( Math.random() * 10 ).toString();
     // Invocando a API
-    const urlRotaGravaVideo = `http://localhost:3000/video/${idGrupoSelecionado}`;
+    const urlRotaGravaVideo = `http://127.0.0.1:3000/video/${idGrupoSelecionado}`;
     const postVideo = await fetch( urlRotaGravaVideo, {
         method: "POST",
         headers: {

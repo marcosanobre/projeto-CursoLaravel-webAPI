@@ -1,11 +1,11 @@
 async function listaVideos() {
-    const conexao = await fetch("http://localhost:3000/videos");
+    const conexao = await fetch("http://127.0.0.1:3000/videos");
     const conexaoJson = await conexao.json();
     return conexaoJson;
 };
 
 async function criaVideo(titulo,descricao,url,imagem) {
-    const conexao = await fetch( "http://localhost:3000/videos", {
+    const conexao = await fetch( "http://127.0.0.1:3000/videos", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -25,7 +25,7 @@ async function criaVideo(titulo,descricao,url,imagem) {
 };
 
 async function buscaVideo( termoDeBusca ) {
-    const fetchURI = `http://localhost:3000/videos?q=${termoDeBusca}`;
+    const fetchURI = `http://127.0.0.1:3000/videos?q=${termoDeBusca}`;
     //console.log(fetchURI);
     const conexao = await fetch( fetchURI );
     const conexaoJSON = await conexao.json();
@@ -34,7 +34,7 @@ async function buscaVideo( termoDeBusca ) {
 
 /* 
 async function criaVideo(titulo, descricao, url, imagem) {
-    const resposta = await fetch("http://localhost:3000/videos", {
+    const resposta = await fetch("http://127.0.0.1:3000/videos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

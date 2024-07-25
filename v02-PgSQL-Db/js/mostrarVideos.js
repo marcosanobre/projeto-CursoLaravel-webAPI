@@ -1,3 +1,6 @@
+// Importação do metodo Default
+import { default as defineImagem } from "./comum.js";
+
 const componenteSelect = document.getElementById("combobox_grupo");
 
 /*  Retardar o registro do Evento CLICK
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // ( equivalente a uma MODEL::GRUPOS )
 // -----------------------------------------------------------------
 function getGrupos() {
-    const urlFetchGrupos = 'http://localhost:3000/grupos';
+    const urlFetchGrupos = 'http://127.0.0.1:3000/grupos';
     fetch(urlFetchGrupos)
         .then( (response) => {
                 return response.json();
@@ -49,24 +52,18 @@ getGrupos();
 // Métodos de Manipulação de Dados
 // ( equivalente a uma MODEL::VIDEOS )
 // -----------------------------------------------------------------
-export default function defineImagem( grupoSelecionado ) {
-    const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
-                (grupoSelecionado==2) ? 'url(../img/cabecalho/ThiagoMatos.jpg)' : 
-                (grupoSelecionado==3) ? 'url(../img/cabecalho/LuizDuarte.jpg)' : 'url()' ;
-    document.getElementById('imagem_grupo').style.backgroundImage = ret;
-}
 
 function getVideosDoGrupo(evento) {
     evento.preventDefault();
     // Recupera Grupo selecionado
     const idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
     // Define imagem de acordo
-    defineImagem( idGrupoSelecionado );
+    document.getElementById('imagem_grupo').style.backgroundImage = defineImagem( idGrupoSelecionado );
     // Define a URL de Inserir Video
     const link2InsereVideo = document.getElementById("link_2_insertVideo");
     link2InsereVideo.href = `./pages/inserir-video.html?gid=${idGrupoSelecionado}`
     // Pega os Videos
-    const urlFetchVideos = `http://localhost:3000/videos/${idGrupoSelecionado}`;
+    const urlFetchVideos = `http://127.0.0.1:3000/videos/${idGrupoSelecionado}`;
     fetch(urlFetchVideos)
         .then( (response) => {
                 return response.json();
@@ -90,8 +87,8 @@ function constroiCard( id, titulo, descricao, url, imagem ) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
         <div class="video-acoes__container">
-            <a class="link-acoes" href="http://localhost:5500/pages/excluir-video.html?exc=${id}" id="a-link-excluivideo">Exclui</a>
-            <a class="link-acoes" href="http://localhost:5500/pages/alterar-video.html?alt=${id}" id="a-link-alteravideo">Altera</a>
+            <a class="link-acoes" href="http://127.0.0.1:5500/pages/excluir-video.html?exc=${id}">Exclui</a>
+            <a class="link-acoes" href="http://127.0.0.1:5500/pages/alterar-video.html?alt=${id}">Altera</a>
         </div>
         <div class="descricao-video">
             <img src="${imagem}" alt="logo canal alura">
