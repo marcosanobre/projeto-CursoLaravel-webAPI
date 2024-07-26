@@ -119,7 +119,7 @@ app.get('/videos/:id_grupo', async ( req, res ) => {
     }
 });
 
-// post Video no GRUPO
+// POST (insere) Video no GRUPO
 app.post('/video/:id_grupo', async ( req, res ) => {
     try {
         const dbConn = await conexao();
@@ -148,16 +148,21 @@ app.post('/video/:id_grupo', async ( req, res ) => {
     }
 });
 
-// PATCH Video no GRUPO
+// PATCH (altera) Video no GRUPO
 app.patch('/video/:id', async ( req, res ) => {
     try {
         const dbConn = await conexao();
         const idVideo = req.params.id;
         const video = req.body;
-        const descr = ! video.descricao ? 
-                      '[' + video.codigo + ' / ' + video.playlist_id + '] ' + Math.floor( Math.random() * 10 ).toString() + '  mil visualizações'
-                      : video.descricao;
-        const ctsp = (new Date()).toJSON();
+        let descr; 
+        if (video.descricao == '') {
+            descr = Math.floor( Math.random() * 10 ).toString() + ` mil visualizações - ` + 
+                    ' [' + (video.codigo=='' ? '' : video.codigo) + 
+                    ' / ' + (video.playlist_id=='' ? '' : video.playlist_id) + ']' ;
+        } else {
+            descr = video.descricao;
+        }
+        const currentTimeStamp = (new Date()).toJSON();
         const sql = 'UPDATE video_curso ' + 
                     'SET titulo         = $1, ' +
                          'url           = $2, ' +
@@ -165,9 +170,9 @@ app.patch('/video/:id', async ( req, res ) => {
                          'imagem        = $4, ' +
                          'tamanho_min   = $5, ' +
                          'tamanho_ms    = $6, ' +
-                         'descricao     = $7  ' +
-                         'updated_at    = $8'
-                    'WHERE id           = $9;' ;
+                         'descricao     = $7, ' +
+                         'updated_at    = $8  ' + 
+                    ' WHERE id          = $9;' ;
         const valores= [ 
                          video.titulo,
                          video.url, 
@@ -176,7 +181,7 @@ app.patch('/video/:id', async ( req, res ) => {
                          video.tamanho_min, 
                          video.tamanho_ms, 
                          descr,
-                         ctsp,
+                         currentTimeStamp,
                          idVideo
                        ];
         //console.log(valores);

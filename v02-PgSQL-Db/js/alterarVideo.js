@@ -8,9 +8,8 @@ function getVideo(idVideo) {
         .then( (response) => {
                 return response.json();
         })
-        .then( (video) => {
-console.log('---------------------->>>>>>>>', video);
-            carregaVideo( video );
+        .then( (video) => {            
+            video[0] ? carregaVideo( video[0] ) : null;
         })
         .catch(function() {
             // handle the error
@@ -21,7 +20,7 @@ function grupoDoVideo( idGrupo ) {
     const urlFetchGrupo = `http://127.0.0.1:3000/grupo/${idGrupo}`;
     fetch(urlFetchGrupo)
         .then( (response) => {
-                return response.json();
+            return response.json();
         })
         .then( (grupo) => {
             const labelGrupo = document.getElementById("grupo_selecionado");
@@ -37,13 +36,12 @@ const urlParams = new URLSearchParams(window.location.search);
 const idVideo = urlParams.get('alt');
 getVideo(idVideo);
 
-let idGrupo = 0;
+let idGrupo = '';
 
 const formulario = document.querySelector("[data-formulario]");
 
 function carregaVideo( video ) {
-console.log('*********-------*********',video);
-    const playList = video.url.includes('?list=') ? video.url.slice( video.url.indexOf('=')+1 ) : '';
+    const playList = (video.url.indexOf('=') > 1 && video.url.includes('?list=')) ? video.url.slice( video.url.indexOf('=')+1 ) : '';
     // Dados do Form
     document.querySelector('[data-titulo]').value      = video.titulo     ;
     document.querySelector('[data-url]').value         = video.url        ;
@@ -54,13 +52,29 @@ console.log('*********-------*********',video);
     document.querySelector('[data-tamanho-ms]').value  = video.tamanho_ms ;
     document.querySelector('[data-descricao]').value   = video.descricao  ;
     // Recupera Grupo do Video
-    idGrupo = video.id_grupo;    
+    idGrupo = video.id_grupo;
     // Define Grupo
-    //grupoDoVideo( idGrupo );
+    grupoDoVideo( idGrupo );
 }
 
 async function gravaVideo (evento) {
     evento.preventDefault();
+    // Dados do Form
+    const titulo        = document.querySelector('[data-titulo]').value;
+    const url           = document.querySelector('[data-url]').value;
+    const video_id      = document.querySelector('[data-video-id]').value;
+    const playlist_id   = document.querySelector('[data-playlist-id]').value;
+    const imagem        = document.querySelector('[data-imagem]').value;
+    const tamanho_min   = document.querySelector('[data-tamanho-min]').value;
+    const tamanho_ms    = document.querySelector('[data-tamanho-ms]').value;
+    let descricao;
+    if (document.querySelector('[data-descricao]').value == '') {
+        descricao = Math.floor( Math.random() * 10 ).toString() + ` mil visualizações - ` + 
+                ' [' + (video.codigo=='' ? '' : video.codigo) + 
+                ' / ' + (video.playlist_id=='' ? '' : video.playlist_id) + ']' ;
+    } else {
+        descricao = document.querySelector('[data-descricao]').value;
+    };
     // Invocando a API
     const urlRotaGravaVideo = `http://127.0.0.1:3000/video/${idVideo}`;
     const postVideo = await fetch( urlRotaGravaVideo, {
@@ -76,7 +90,7 @@ async function gravaVideo (evento) {
             imagem: imagem,
             tamanho_min: tamanho_min,
             tamanho_ms: tamanho_ms,
-            descricao: `${descricao} mil visualizações`
+            descricao: descricao
         } )
     } );
 
