@@ -1,6 +1,5 @@
-// Importação do metodo Default
-import { default as defineImagem } from "./mostrarVideos.js";
-
+// Importação de metodos
+import * as commonLib from "./comum.js";
 
 //import { idGrupoSelecionado, txtGrupoSelecionado } from "./mostrarVideos.js";
 //import { baseData } from "./mostrarVideos.js";
@@ -17,7 +16,7 @@ function grupoSelecionado( idGrupo ) {
         .then( (grupo) => {
             const labelGrupo = document.getElementById("grupo_selecionado");
             labelGrupo.innerHTML = grupo[0].titulo;
-            defineImagem(idGrupo);
+            document.getElementById('imagem_grupo').style.backgroundImage = commonLib.defineImagem(idGrupo);
         })
         .catch(function() {
             // handle the error
@@ -40,7 +39,7 @@ async function criarVideo( evento ) {
     const imagem = document.querySelector('[data-imagem]').value;
     const tamanho_min = document.querySelector('[data-tamanho-min]').value;
     const tamanho_ms = document.querySelector('[data-tamanho-ms]').value;
-    const descricao = Math.floor( Math.random() * 10 ).toString();
+    const descricao = Math.floor( Math.random() * 10 ).toString() + ' mil visualizações';
     // Invocando a API
     const urlRotaGravaVideo = `http://127.0.0.1:3000/video/${idGrupoSelecionado}`;
     const postVideo = await fetch( urlRotaGravaVideo, {
@@ -51,12 +50,12 @@ async function criarVideo( evento ) {
         body: JSON.stringify( {
             titulo: titulo,
             url: url,
-            codigo: video_id,
-            playlist_id: playlist_id,
             imagem: imagem,
             tamanho_min: tamanho_min,
             tamanho_ms: tamanho_ms,
-            descricao: `${descricao} mil visualizações`
+            descricao: descricao,
+            video_id: video_id,
+            playlist_id: playlist_id
         } )
     } );
 

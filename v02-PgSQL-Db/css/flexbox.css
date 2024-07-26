@@ -17,12 +17,12 @@
     flex-wrap: wrap;
     gap: 10px;
     z-index: 1;
-    padding: 153px 20px 10px 20px;
+    padding: 150px 30px 30px 20px;
 }
 
 .videos__item {
     flex-grow: 1;
-    height: 303px;
+    height: 330px;
     width: 300px;
 }
 
@@ -35,7 +35,7 @@
     align-items: baseline;
     gap: 10px;
     z-index: 1;
-    padding: 10px 5px 10px 5px;
+    padding: 5px 0px 5px 0px;
 }
 
 a.link-acoes:link, a.link-acoes:visited, a.link-acoes:active {

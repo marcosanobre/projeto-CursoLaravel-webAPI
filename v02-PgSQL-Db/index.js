@@ -125,18 +125,20 @@ app.post('/video/:id_grupo', async ( req, res ) => {
         const dbConn = await conexao();
         const id_grupo = req.params.id_grupo;
         const video = req.body;
-        const descr = '[' + video.codigo + ' / ' + video.playlist_id + '] ' + video.descricao;
+        const descr = ( video.descricao == '' ) ? Math.floor( Math.random() * 10 ).toString() + ` mil visualizações.` : video.descricao ;
         const sql = 'INSERT INTO video_curso ' + 
-                    '(titulo,url,codigo,imagem,tamanho_min,tamanho_ms,descricao,id_grupo) ' +
-                    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
-        const valores = [ video.titulo,
+                    '(titulo,url,imagem,tamanho_min,tamanho_ms,descricao,id_grupo,video_id,playlist_id) ' +
+                    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
+        const valores = [ 
+                        video.titulo,
                         video.url, 
-                        video.codigo, 
                         video.imagem, 
                         video.tamanho_min, 
                         video.tamanho_ms, 
                         descr,
-                        id_grupo
+                        id_grupo,
+                        video.video_id,
+                        video.playlist_id
                         ];
         //console.log(valores);
         await dbConn.query( sql, valores );
@@ -154,34 +156,29 @@ app.patch('/video/:id', async ( req, res ) => {
         const dbConn = await conexao();
         const idVideo = req.params.id;
         const video = req.body;
-        let descr; 
-        if (video.descricao == '') {
-            descr = Math.floor( Math.random() * 10 ).toString() + ` mil visualizações - ` + 
-                    ' [' + (video.codigo=='' ? '' : video.codigo) + 
-                    ' / ' + (video.playlist_id=='' ? '' : video.playlist_id) + ']' ;
-        } else {
-            descr = video.descricao;
-        }
+        const descr = ( video.descricao == '' ) ? Math.floor( Math.random() * 10 ).toString() + ` mil visualizações.` : video.descricao ;
         const currentTimeStamp = (new Date()).toJSON();
         const sql = 'UPDATE video_curso ' + 
                     'SET titulo         = $1, ' +
                          'url           = $2, ' +
-                         'codigo        = $3, ' +
+                         'video_id      = $3, ' +
                          'imagem        = $4, ' +
                          'tamanho_min   = $5, ' +
                          'tamanho_ms    = $6, ' +
                          'descricao     = $7, ' +
-                         'updated_at    = $8  ' + 
-                    ' WHERE id          = $9;' ;
+                         'updated_at    = $8, ' + 
+                         'playlist_id   = $9  ' +
+                    ' WHERE id          = $10;' ;
         const valores= [ 
                          video.titulo,
                          video.url, 
-                         video.codigo, 
+                         video.video_id, 
                          video.imagem, 
                          video.tamanho_min, 
                          video.tamanho_ms, 
                          descr,
                          currentTimeStamp,
+                         video.playlist_id,
                          idVideo
                        ];
         //console.log(valores);

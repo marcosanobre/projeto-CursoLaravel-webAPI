@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS video_curso (
       descricao varchar(150),
       url varchar(200) NOT NULL,
       imagem varchar(200), 
-      codigo varchar(15),
+      video_id varchar(15),
+      playlist_id varchar(100),
       tamanho_min varchar(10),
       tamanho_ms varchar(10),
       id_grupo integer,
@@ -281,12 +282,12 @@ VALUES ( '{	"titulo": "Curso gratuito Laravel 9 INTRO #1 - Introdução e instal
 	}'
 );
 
-insert into video_curso (titulo, descricao, url, imagem, codigo, id_grupo)
+insert into video_curso (titulo, descricao, url, imagem, video_id, id_grupo)
 	select 	videos->>'titulo' titulo,
                 videos->>'descricao' descricao,
 		videos->>'url' url,
 		videos->>'imagem' imagem,
-		videos->>'codigo' codigo,
+		videos->>'codigo' video_id,
 		2 as id_grupo
 	from video_aulas
 	where id <= 34;
@@ -356,13 +357,13 @@ VALUES
 ( '{"titulo":"Curso de PHP 8   Aula 031   Constantes","url":"https://www.youtube.com/watch?v=tEx9MQuPB4w","codigo":"tEx9MQuPB4w","tamanho_min":"10:31","tamanho_ms":"631000","imagem":"https://i.ytimg.com/vi/tEx9MQuPB4w/hqdefault.jpg"}')
 ;
 
-insert into video_curso (titulo, url, tamanho_min, tamanho_ms, imagem, codigo, id_grupo)
+insert into video_curso (titulo, url, tamanho_min, tamanho_ms, imagem, video_id, id_grupo)
 	select 	videos->>'titulo' titulo,
 		videos->>'url' url,
                 videos->>'tamanhomin' tamanho_min,
                 videos->>'tamanho_ms' tamanho_ms,
 		videos->>'imagem' imagem,
-		videos->>'codigo' codigo,
+		videos->>'codigo' video_id,
 		1 as id_grupo
 	from video_aulas
 	where id > 34;
@@ -373,9 +374,10 @@ UNION
 select id, url, 'https://www.youtube.com/embed/'||substring( url, position('v=' in url)+2)||'?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9' as newurl, descricao 
 from video_curso where id_grupo = 1 and id >= 35 order by id asc;
 */
-UPDATE video_curso 
-SET descricao = url,
-url = 'https://www.youtube.com/embed/'||substring( url, position('v=' in url)+2)||'?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9' 
+UPDATE video_curso
+ SET url = 'https://' ||  
+	   'www.youtube.com/embed/' || substring( url, position('v=' in url)+2) || '?list=PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9',
+     playlist_id = 'PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9'
 WHERE id_grupo = 1 and id >= 35;
 
 select id, url, descricao from video_curso where id_grupo = 1 and id >= 35 order by id asc;

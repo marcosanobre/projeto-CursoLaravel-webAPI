@@ -1,5 +1,5 @@
-// Importação do metodo Default
-import { default as defineImagem } from "./comum.js";
+// Importação de metodos
+import * as commonLib from "./comum.js";
 
 function getVideo(idVideo) {
     // Pega os Videos
@@ -25,7 +25,7 @@ function grupoDoVideo( idGrupo ) {
         .then( (grupo) => {
             const labelGrupo = document.getElementById("grupo_selecionado");
             labelGrupo.innerHTML = grupo[0].titulo;
-            document.getElementById('imagem_grupo').style.backgroundImage = defineImagem(idGrupo);
+            document.getElementById('imagem_grupo').style.backgroundImage = commonLib.defineImagem(idGrupo);
         })
         .catch(function() {
             // handle the error
@@ -41,12 +41,12 @@ let idGrupo = '';
 const formulario = document.querySelector("[data-formulario]");
 
 function carregaVideo( video ) {
-    const playList = (video.url.indexOf('=') > 1 && video.url.includes('?list=')) ? video.url.slice( video.url.indexOf('=')+1 ) : '';
+    //const playList = (video.url.indexOf('=') > 1 && video.url.includes('?list=')) ? video.url.slice( video.url.indexOf('=')+1 ) : '';
     // Dados do Form
     document.querySelector('[data-titulo]').value      = video.titulo     ;
     document.querySelector('[data-url]').value         = video.url        ;
-    document.querySelector('[data-video-id]').value    = video.codigo     ;
-    document.querySelector('[data-playlist-id]').value = playList         ;
+    document.querySelector('[data-video-id]').value    = video.video_id   ;
+    document.querySelector('[data-playlist-id]').value = video.playlist_id;
     document.querySelector('[data-imagem]').value      = video.imagem     ;
     document.querySelector('[data-tamanho-min]').value = video.tamanho_min;
     document.querySelector('[data-tamanho-ms]').value  = video.tamanho_ms ;
@@ -69,9 +69,7 @@ async function gravaVideo (evento) {
     const tamanho_ms    = document.querySelector('[data-tamanho-ms]').value;
     let descricao;
     if (document.querySelector('[data-descricao]').value == '') {
-        descricao = Math.floor( Math.random() * 10 ).toString() + ` mil visualizações - ` + 
-                ' [' + (video.codigo=='' ? '' : video.codigo) + 
-                ' / ' + (video.playlist_id=='' ? '' : video.playlist_id) + ']' ;
+        descricao = Math.floor( Math.random() * 10 ).toString() + ` mil visualizações`;
     } else {
         descricao = document.querySelector('[data-descricao]').value;
     };
@@ -85,7 +83,7 @@ async function gravaVideo (evento) {
         body: JSON.stringify( {
             titulo: titulo,
             url: url,
-            codigo: video_id,
+            video_id: video_id,
             playlist_id: playlist_id,
             imagem: imagem,
             tamanho_min: tamanho_min,

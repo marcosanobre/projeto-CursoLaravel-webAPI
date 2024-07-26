@@ -1,5 +1,5 @@
-// Importação do metodo Default
-import { default as defineImagem } from "./comum.js";
+// Importação de metodos
+import * as commonLib from "./comum.js";
 
 const componenteSelect = document.getElementById("combobox_grupo");
 
@@ -21,7 +21,7 @@ function getGrupos() {
                 return response.json();
         })
         .then( (grupos) => {
-            carregaComboBoxGrupos( grupos );
+            carregaComboBoxGrupos(grupos);
         })
         .catch(function() {
             // handle the error
@@ -29,20 +29,10 @@ function getGrupos() {
 };
 
 function carregaComboBoxGrupos( grupos ) {
-    const firstOption = document.createElement('option');
-    firstOption.selected = true;
-    firstOption.disabled = true;
-    firstOption.value = 0;
-    firstOption.textContent = 'Selecione o GRUPO de videos !!!';
-    componenteSelect.appendChild( firstOption );
-    grupos.forEach( (grupo) => {
-        //console.log( grupo.id, grupo.titulo );
-        const htmlOption = document.createElement('option');
-        htmlOption.value = grupo.id;
-        htmlOption.textContent = grupo.titulo;
-        componenteSelect.appendChild( htmlOption );
-    });
-    componenteSelect?.addEventListener( 'change', (evt) => getVideosDoGrupo(evt), false );
+    commonLib.carregaComboBoxGrupos(componenteSelect, grupos);
+    if (componenteSelect.options.length > 0 ) {
+        componenteSelect.addEventListener( 'change', (evt) => getVideosDoGrupo(evt), false );
+    }
     //componenteSelect?.addEventListener( 'change', getVideosDoGrupo(), false );
 };
 
@@ -58,7 +48,7 @@ function getVideosDoGrupo(evento) {
     // Recupera Grupo selecionado
     const idGrupoSelecionado = componenteSelect.options[componenteSelect.selectedIndex].value;
     // Define imagem de acordo
-    document.getElementById('imagem_grupo').style.backgroundImage = defineImagem( idGrupoSelecionado );
+    document.getElementById('imagem_grupo').style.backgroundImage = commonLib.defineImagem( idGrupoSelecionado );
     // Define a URL de Inserir Video
     const link2InsereVideo = document.getElementById("link_2_insertVideo");
     link2InsereVideo.href = `./pages/inserir-video.html?gid=${idGrupoSelecionado}`
@@ -78,47 +68,8 @@ function getVideosDoGrupo(evento) {
 
 const lista = document.querySelector("[data-lista]");
 
-function constroiCard( id, titulo, descricao, url, imagem ) {
-    const video = document.createElement('li');
-    video.className = 'videos__item';
-    video.innerHTML = `
-        <iframe width="100%" height="72%" src="${url}"
-            title="${titulo}" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        <div class="video-acoes__container">
-            <a class="link-acoes" href="http://127.0.0.1:5500/pages/excluir-video.html?exc=${id}">Exclui</a>
-            <a class="link-acoes" href="http://127.0.0.1:5500/pages/alterar-video.html?alt=${id}">Altera</a>
-        </div>
-        <div class="descricao-video">
-            <img src="${imagem}" alt="logo canal alura">
-            <h3>${titulo}</h3>
-            <p>${descricao}</p>
-        </div>
-    `;
-    return video;
-};
-
 function carregaVideos( videos ) {
-    // Limpa / Esvazia a biblioteca
-    // de videos, antes de preencher
-    while ( lista.firstChild ) {
-        lista.removeChild( lista.firstChild );
-    };
-    // Dispoe Videos na página 
-    try {
-        //console.log(videos);
-        videos.forEach( 
-            (elemento) => lista.appendChild( 
-                constroiCard(   elemento.id,
-                                elemento.titulo,
-                                elemento.descricao,
-                                elemento.url,
-                                elemento.imagem 
-                            ) ) );
-    } catch {
-        lista.innerHTML = `<h2 class="mensagem__titulo__erro">Não foi possível carregar a lista de vídeos.</h2>`;
-    }
+    commonLib.carregaVideos( lista, videos );
 };
 
 // export { idGrupoSelecionado, txtGrupoSelecionado } ;
