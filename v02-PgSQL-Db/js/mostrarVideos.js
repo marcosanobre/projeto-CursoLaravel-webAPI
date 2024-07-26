@@ -3,6 +3,8 @@ import * as commonLib from "./comum.js";
 
 const componenteSelect = document.getElementById("combobox_grupo");
 
+const listaDeVideos = document.querySelector("[data-lista]");
+
 /*  Retardar o registro do Evento CLICK
 document.addEventListener('DOMContentLoaded', function () {
     componenteSelect?.addEventListener( 'click', (evt) => getVideosDoGrupo(evt), true );
@@ -66,10 +68,8 @@ function getVideosDoGrupo(evento) {
         });
 }
 
-const lista = document.querySelector("[data-lista]");
-
 function carregaVideos( videos ) {
-    commonLib.carregaVideos( lista, videos );
+    commonLib.carregaVideos( listaDeVideos, videos );
 };
 
 // export { idGrupoSelecionado, txtGrupoSelecionado } ;

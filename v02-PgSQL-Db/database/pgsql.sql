@@ -380,7 +380,7 @@ UPDATE video_curso
      playlist_id = 'PL0N5TAOhX5E9eJ9Ix6YUIgEw3lNmaIEE9'
 WHERE id_grupo = 1 and id >= 35;
 
-select id, url, descricao from video_curso where id_grupo = 1 and id >= 35 order by id asc;
+select id, url, video_id, playlist_id, descricao from video_curso where id_grupo = 1 and id >= 35 order by id asc;
 /*
 */
 

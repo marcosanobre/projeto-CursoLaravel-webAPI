@@ -192,6 +192,20 @@ app.patch('/video/:id', async ( req, res ) => {
 });
 
 
+// EXCLUI (deleta) Video no GRUPO
+app.delete('/video/:id', async ( req, res ) => {
+    try {
+        const dbConn = await conexao();
+        const idVideo = req.params.id;
+        const sql = 'DELETE FROM video_curso WHERE id = $1;';
+        await dbConn.query( sql, [idVideo] );
+        res.status(200).json('Video exclido com sucesso !');
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Problemas ao obter dados dos Grupos.');
+    }
+});
+
 /* 
 
 module.exports = conexao();
