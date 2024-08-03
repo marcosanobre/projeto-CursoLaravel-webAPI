@@ -1,6 +1,7 @@
 // Carregar biblioteca de Configuração de App
-const dotenv = require("dotenv");
-dotenv.config();
+//const dotenv = require("dotenv");
+// Lê , por default, um arquivo .ENV
+//dotenv.config();
 
 // Carregar o frmwrk EXPRESS
 const express = require("express");
@@ -24,23 +25,23 @@ async function conexao() {
         return global.connection.connect();
 
     const { Pool } = require('pg');
-    //const pool = new Pool( {connectionString: process.env.CONNECTION_STRING });
+    //const pool = new Pool({connectionString: process.env.CONNECTION_STRING});
     const pool = new Pool( {
-				host: process.env.PG_HOST,
-				port: process.env.PG_PORT,
-				database: process.env.PG_DATABASE,
-				user: process.env.PG_USERNAME,
-				password: process.env.PG_PASSWORD
+                                host: process.env.PG_HOST,
+                                port: process.env.PG_PORT,
+                                database: process.env.PG_DATABASE,
+                                user: process.env.PG_USERNAME,
+                                password: process.env.PG_PASSWORD
 			   } );
 
     //apenas testando a conexão
     /*
-    const dbConn = await pool.connect();
+    const client = await pool.connect();
     console.log("Criou pool de conexões no PostgreSQL!");
- 
-    const res = await dbConn.query('SELECT NOW()');
+
+    const res = await client.query('SELECT NOW()');
     console.log(res.rows[0]);
-    dbConn.release();
+    client.release();
     */
 
     //guardando para usar sempre o mesmo
@@ -68,9 +69,9 @@ app.listen( process.env.PORT, () => {
 // não é usado
 app.get('/grupos', async (___, res) => {
     try {
-      const dbConn = await conexao();
+      const client = await conexao();
       const query = 'SELECT * FROM grupo_videocurso ORDER BY id;';
-      const { rows } = await dbConn.query(query);
+      const { rows } = await client.query(query);
       res.status(200).json(rows);
     } catch (err) {
       console.error(err);
@@ -81,9 +82,9 @@ app.get('/grupos', async (___, res) => {
 app.get('/grupo/:id_grupo', async ( req, res) => {
     try {
         const id_grupo = req.params.id_grupo;
-        const dbConn = await conexao();
+        const client = await conexao();
         const query = `SELECT titulo FROM grupo_videocurso WHERE id = ${id_grupo};`;
-        const { rows } = await dbConn.query(query);
+        const { rows } = await client.query(query);
         res.status(200).json(rows);
     } catch (err) {
         console.error(err);
@@ -114,9 +115,9 @@ app.get('/video/:id_video', async ( req, res ) => {
 app.get('/videos/:id_grupo', async ( req, res ) => {
     try {
       const id_grupo = req.params.id_grupo;
-      const dbConn = await conexao();
+      const client = await conexao();
       const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo} ORDER BY id ASC`;
-      const { rows } = await dbConn.query( query );
+      const { rows } = await client.query( query );
       res.status(200).json(rows);
     } catch (err) {
       console.error(err);
