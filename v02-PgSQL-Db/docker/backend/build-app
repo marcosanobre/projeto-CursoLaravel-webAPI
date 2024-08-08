@@ -6,7 +6,7 @@ clear
 
 cp env_modelo .env
 
-ippg=`/usr/local/bin/dckr_ips_containers | grep pgsql | cut -d: -f3 | xargs`
+ippg=`/usr/local/bin/dckr_ips_containers | grep postgresql | cut -d: -f3 | xargs`
 ippg="PG_HOST=$ippg"
 echo -e $ippg >> .env
 
