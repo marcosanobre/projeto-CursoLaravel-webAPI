@@ -16,6 +16,8 @@ clear
 
 /usr/bin/docker build --pull --no-cache --tag videocursosbib:1.0 .
 
+/usr/bin/sleep 3s
+
 #/usr/local/bin/docker-compose -f videocursos.yml up -d
 #/usr/bin/sleep 3s
 #/usr/bin/docker exec -it wsl-videocursos bash

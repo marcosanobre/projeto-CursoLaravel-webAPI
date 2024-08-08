@@ -1,17 +1,12 @@
 version: '3.3'
 
-# rede criada para comportar Serviços em SWARM-mode
+# rede criada para comportar Serviços no Docker
 networks:
   ntwkr_docker:
     external: true
 
-#volumes:
-#  # volume com os dados do PgAdmin-4
-#  vlm_pgadmin4:
-#    external: true
-
 services:
-  wslvideocursos:
+  wsl_bkend_videocursos:
     image: videocursosbib:1.0
     env_file: .env
     container_name: wsl-videocursos
@@ -26,7 +21,7 @@ services:
       - traefik.docker.network=ntwkr_docker
 
       # URL to reach this container in HTTP
-      - traefik.http.routers.wslvideocursos.rule=Host(`wslvideocursos.docker.localhost`)
+      - traefik.http.routers.wsl_bkend_videocursos.rule=Host(`wsl_bkend_videocursos.docker.localhost`)
 
 #      - traefik.http.routers.wslpgadmin4-http.rule=Host(`pgadmin4.docker.localhost`)
 #      - traefik.http.routers.wslpgadmin4-http.entrypoints=http
@@ -36,10 +31,10 @@ services:
 #      - traefik.http.routers.wslpgadmin4-https.entrypoints=https
 
       # Activation of TLS
-      - traefik.http.routers.wslvideocursos-https.tls=true
+      - traefik.http.routers.wsl_bkend_videocursos-https.tls=true
 
       # If port is different than 80, use the following service:
-      - traefik.http.services.wslvideocursos.loadbalancer.server.port=3000
+      - traefik.http.services.wsl_bkend_videocursos.loadbalancer.server.port=3000
     networks:
       - ntwkr_docker
 #    volumes:
