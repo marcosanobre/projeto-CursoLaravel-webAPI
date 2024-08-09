@@ -1,0 +1,26 @@
+#!/bin/bash
+
+clear
+
+# dckr_rmcontainer vcfront && \
+# docker image rm -f videocursosbib-front:1.0 && \
+# ./build-app && docker run -d --name vcfront -p 8080:80 videocursosbib-front:1.0 && \
+# docker exec -it vcfront bash
+
+# /usr/local/bin/docker-compose -f videocursos.yml down > /dev/null 2>&1
+
+/usr/bin/docker image rm videocursosbib-front:1.0 > /dev/null 2>&1
+
+clear
+
+/usr/bin/docker build --pull --no-cache --tag videocursosbib-front:1.0 .
+
+#/usr/bin/sleep 3s
+
+#/usr/local/bin/docker-compose -f videocursos.yml up -d
+#/usr/bin/sleep 3s
+#/usr/bin/docker exec -it wsl-videocursos bash
+
+# docker run -d --name vcfront -p 8080:80 videocursosbib-front:1.0
+# docker exec -it vcfront bash
+
