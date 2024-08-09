@@ -2,14 +2,15 @@
 
 clear
 
-# dckr_rmcontainer vcfront && \
+/usr/local/bin/dckr_rmcontainer vcfront > /dev/null 2>&1
+
 # docker image rm -f videocursosbib-front:1.0 && \
 # ./build-app && docker run -d --name vcfront -p 8080:80 videocursosbib-front:1.0 && \
 # docker exec -it vcfront bash
 
-# /usr/local/bin/docker-compose -f videocursos.yml down > /dev/null 2>&1
+/usr/local/bin/docker-compose -f docker-compose.yml down > /dev/null 2>&1
 
-/usr/bin/docker image rm videocursosbib-front:1.0 > /dev/null 2>&1
+/usr/bin/docker image rm -f videocursosbib-front:1.0 > /dev/null 2>&1
 
 clear
 
