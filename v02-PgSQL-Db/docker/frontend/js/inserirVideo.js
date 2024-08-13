@@ -2,6 +2,11 @@
 import * as commonLib from "./comum.js";
 
 const API_URL = commonLib.API_URL;
+const APP_URL = commonLib.APP_URL;
+
+const botaoCancela = document.getElementById("botao_cancela");
+botaoCancela.href  = `${APP_URL}/index.html`;
+
 
 function grupoSelecionado( idGrupo ) {
     const urlFetchGrupo = `${API_URL}/grupo/${idGrupo}`;
@@ -59,7 +64,7 @@ async function criarVideo( evento ) {
         throw new Error("Não foi possível gravar/inserir vídeo !!!");
     };
 
-    window.location.href = `../pages/envio-concluido.html?${idGrupoSelecionado}`;
+    window.location.href = `${APP_URL}/pages/envio-concluido.html?${idGrupoSelecionado}`;
     //return postVideo.json();
 };
 

@@ -2,6 +2,11 @@
 import * as commonLib from "./comum.js";
 
 const API_URL = commonLib.API_URL;
+const APP_URL = commonLib.APP_URL;
+
+const botaoCancela = document.getElementById("botao_cancela");
+botaoCancela.href  = `${APP_URL}/index.html`;
+
 
 function getVideo(idVideo) {
     // Pega os Videos

@@ -1,5 +1,5 @@
 const API_URL = 'http://wslvideocursosapi.docker.localhost:3000';
-const APP_URL = 'http://videocursosbib';
+const APP_URL = 'http://wslvideocursosfront.docker.localhost:8090';
 
 function defineImagem( grupoSelecionado ) {
     const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
@@ -8,7 +8,7 @@ function defineImagem( grupoSelecionado ) {
     return ret;
 };
 
-function constroiCard( id, titulo, descricao, url, imagem ) {
+function constroiCard( id, titulo, descricao, url, imagem, APP_URL ) {
     const video = document.createElement('li');
     video.className = 'videos__item';
     video.innerHTML = `
@@ -45,7 +45,7 @@ function carregaComboBoxGrupos(componenteSelect, grupos) {
     });
 };
 
-function carregaVideos( lista, videos ) {
+function carregaVideos( lista, videos, APP_URL ) {
     // Limpa / Esvazia a biblioteca
     // de videos, antes de preencher
     while ( lista.firstChild ) {
@@ -61,14 +61,15 @@ function carregaVideos( lista, videos ) {
                                 elemento.titulo,
                                 elemento.descricao,
                                 elemento.url,
-                                elemento.imagem 
+                                elemento.imagem,
+                                APP_URL 
                             ) ) );
     } catch {
         lista.innerHTML = `<h2 class="mensagem__titulo__erro">Não foi possível carregar a lista de vídeos.</h2>`;
     };
 };
 
-export { API_URL, carregaVideos, carregaComboBoxGrupos, constroiCard, defineImagem };
+export { API_URL, APP_URL, carregaVideos, carregaComboBoxGrupos, constroiCard, defineImagem };
 
 
 

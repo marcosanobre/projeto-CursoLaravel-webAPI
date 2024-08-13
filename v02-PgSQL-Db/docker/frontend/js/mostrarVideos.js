@@ -2,6 +2,7 @@
 import * as commonLib from "./comum.js";
 
 const API_URL = commonLib.API_URL;
+const APP_URL = commonLib.APP_URL;
 
 const componenteSelect = document.getElementById("combobox_grupo");
 
@@ -71,7 +72,7 @@ function getVideosDoGrupo(evento) {
 }
 
 function carregaVideos( videos ) {
-    commonLib.carregaVideos( listaDeVideos, videos );
+    commonLib.carregaVideos( listaDeVideos, videos, APP_URL );
 };
 
 // export { idGrupoSelecionado, txtGrupoSelecionado } ;
