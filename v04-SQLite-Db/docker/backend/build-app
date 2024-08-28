@@ -1,0 +1,24 @@
+#!/bin/bash
+
+clear
+
+/usr/local/bin/docker-compose -f videocursos.yml down > /dev/null 2>&1
+
+cp env_modelo .env
+
+ippg=`/usr/local/bin/dckr_ips_containers | grep postgresql | cut -d: -f3 | xargs`
+ippg="PG_HOST=$ippg"
+echo -e $ippg >> .env
+
+/usr/bin/docker image rm videocursosbib-back:1.0 > /dev/null 2>&1
+
+clear
+
+/usr/bin/docker build --pull --no-cache --tag videocursosbib-back:1.0 .
+
+/usr/bin/sleep 3s
+
+#/usr/local/bin/docker-compose -f videocursos.yml up -d
+#/usr/bin/sleep 3s
+#/usr/bin/docker exec -it wsl-videocursos bash
+

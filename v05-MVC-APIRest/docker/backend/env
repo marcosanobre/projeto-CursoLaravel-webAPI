@@ -1,0 +1,7 @@
+PORT=3000
+PG_PORT=5432
+PG_DATABASE=video_cursos
+PG_USERNAME=postgres
+PG_PASSWORD=pg01
+PG_HOST=wspgsql14pgis3.docker.localhost
+

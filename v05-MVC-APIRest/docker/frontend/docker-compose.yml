@@ -1,0 +1,51 @@
+version: '3.3'
+
+# rede criada para comportar Serviços em SWARM-mode
+networks:
+  ntwkr_docker:
+    external: true
+
+services:
+  wslvideocursosfront:
+    image: videocursosbib-front:1.0
+    container_name: wsl-videocursos-front
+    labels:
+      # Enable this container to be mapped by traefik
+      # For more information, see: https://docs.traefik.io/providers/docker/#exposedbydefault
+      - traefik.enable=true
+
+      # Define the network that should be used
+      - traefik.docker.network=ntwkr_docker
+
+      # URL to reach this container in HTTP
+      - traefik.http.routers.wslvideocursosfront.rule=Host(`wslvideocursosfront.docker.localhost`)
+      # - traefik.http.routers.wslpgadmin4-http.entrypoints=http
+      # - traefik.http.routers.wslpgadmin4-http.middlewares=https-redirect
+      # URL redirected in HTTPS
+      # - traefik.http.routers.wslpgadmin4-https.rule=Host(`pgadmin4.docker.localhost`)
+      # - traefik.http.routers.wslpgadmin4-https.entrypoints=https
+
+      # Activation of TLS
+      # - traefik.http.routers.wslvideocursos-https.tls=true
+
+      # If port is different than 80, use the following service:
+      - traefik.http.services.wslvideocursosfront.loadbalancer.server.port=8080
+    networks:
+      - ntwkr_docker
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+#    environment:
+#      - API_PORT=3000
+#      - PORT=3000
+#      - PG_PORT=5432
+#      - PG_DATABASE=video_cursos
+#      - PG_USERNAME=postgres
+#      - PG_PASSWORD=pg01
+#      - PG_HOST=wspgsql14pgis3
+#    restart: on-failure
+#    healthcheck:
+#      test: wget --no-verbose --tries=1 --spider http://localhost:3000/testeAPI || exit 1
+#      interval: 60s
+#      retries: 5
+#      start_period: 20s
+#      timeout: 10s
