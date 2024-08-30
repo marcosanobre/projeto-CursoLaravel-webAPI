@@ -19,19 +19,34 @@ app.use( cors() );
 
 // Definindo uma CONNECTION por meio
 // da criação de um Connection-Pool
-async function conexao() {
-    if (global.connection)
-        return global.connection.connect();
+function conexao() {
+//    if (global.connection)
+//        return global.connection.db;
 
-    const { Pool } = require('pg');
-    //const pool = new Pool( {connectionString: process.env.CONNECTION_STRING });
-    const pool = new Pool( {
-				host: process.env.PG_HOST,
-				port: process.env.PG_PORT,
-				database: process.env.PG_DATABASE,
-				user: process.env.PG_USERNAME,
-				password: process.env.PG_PASSWORD
-			   } );
+    const sqlite3 = require('sqlite3').verbose();
+//    const sqlite_DBfile = process.env.SQLITE_DATABASE;
+//    const sqlite_Mode = process.env.SQLITE_MODE;
+
+    // open the database
+/*     
+const db  = new sqlite3.Database( './database/video_cursos.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the vc database.');
+  });
+ */
+     
+    const db = new sqlite3.Database(  './database/video_cursos.sqlite3', 
+                                      sqlite3.OPEN_READWRITE, 
+                                      (err) => {
+                                                if (err) {
+                                                    console.error(err.message);
+                                                } else {
+                                                    console.log('Connected to the database.');
+                                                };
+                                             } 
+                                 );
 
     //apenas testando a conexão
     /*
@@ -44,8 +59,8 @@ async function conexao() {
     */
 
     //guardando para usar sempre o mesmo
-    global.connection = pool;
-    return await pool.connect();
+//    global.connection = db;
+    return db;
 }
 
 // Configurar o EntryPoint
@@ -66,16 +81,27 @@ app.listen( process.env.PORT, () => {
 // 1o Parametro da função anonima
 // async (reuest,response)
 // não é usado
-app.get('/grupos', async (___, res) => {
+app.get('/grupos', (___, res) => {
     try {
-      const dbConn = await conexao();
-      const query = 'SELECT * FROM grupo_videocurso ORDER BY id;';
-      const { rows } = await dbConn.query(query);
-      res.status(200).json(rows);
+      const dbConn = conexao();
+      
+      const query = 'SELECT * FROM grupo_videocurso ORDER BY id';
+
+      dbConn.all( query, 
+                  [], 
+                  (err, rows) => {
+                                    if (err) {
+                                        throw err;
+                                    } else {
+                                        res.status(200).json( rows );
+                                    }
+                                }   
+                );
     } catch (err) {
       console.error(err);
       res.status(500).send('Problemas ao obter dados dos Grupos.');
     }
+
 });
 
 app.get('/grupo/:id_grupo', async ( req, res) => {
