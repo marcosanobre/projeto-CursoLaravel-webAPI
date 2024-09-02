@@ -2,21 +2,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-// Carregar o frmwrk EXPRESS
-const express = require("express");
-
-// Carregar o módulo CORS
-const cors = require('cors');
-
-// Inicializar o frmwrk
-const app = express();
-
-// Configuração de conversão de Body
-// serialização e deserialização de Objeto
-// Json => Objeto => Json
-app.use( express.json() );
-app.use( cors() );
-
 // Definindo uma CONNECTION por meio
 // da criação de um Connection-Pool
 function conexao() {
@@ -73,36 +58,6 @@ app.listen( process.env.PORT, () => {
 // -----------------------------------------------------------------
 // Configuração dos endPOINTS da API
 // -----------------------------------------------------------------
-
-
-// *****************************************************************
-// GRUPOS
-// *****************************************************************
-// 1o Parametro da função anonima
-// async (reuest,response)
-// não é usado
-app.get('/grupos', (___, res) => {
-    try {
-      const dbConn = conexao();
-      
-      const query = 'SELECT * FROM grupo_videocurso ORDER BY id';
-
-      dbConn.all( query, 
-                  [], 
-                  (err, rows) => {
-                                    if (err) {
-                                        throw err;
-                                    } else {
-                                        res.status(200).json( rows );
-                                    }
-                                }   
-                );
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Problemas ao obter dados dos Grupos.');
-    }
-
-});
 
 app.get('/grupo/:id_grupo', async ( req, res) => {
     try {
