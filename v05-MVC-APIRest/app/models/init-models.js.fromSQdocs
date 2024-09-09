@@ -1,0 +1,19 @@
+var DataTypes = require("sequelize").DataTypes;
+var _grupo_videocurso = require("./grupo_videocurso");
+var _video_curso = require("./video_curso");
+
+function initModels(sequelize) {
+  var grupo_videocurso = _grupo_videocurso(sequelize, DataTypes);
+  var video_curso = _video_curso(sequelize, DataTypes);
+
+  video_curso.belongsTo(grupo_videocurso, { as: "id_grupo_grupo_videocurso", foreignKey: "id_grupo"});
+  grupo_videocurso.hasMany(video_curso, { as: "video_cursos", foreignKey: "id_grupo"});
+
+  return {
+    grupo_videocurso,
+    video_curso,
+  };
+}
+module.exports = initModels;
+module.exports.initModels = initModels;
+module.exports.default = initModels;

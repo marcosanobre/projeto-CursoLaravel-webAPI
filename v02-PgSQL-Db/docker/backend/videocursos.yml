@@ -7,7 +7,7 @@ networks:
 
 services:
   wsl_bkend_videocursos:
-    image: videocursosbib:1.0
+    image: videocursosbib-back:1.0
     env_file: .env
     container_name: wsl-videocursos
 #    ports:
