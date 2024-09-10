@@ -7,10 +7,13 @@
 > su postgres
 >
 > postgres=# \password
+> 
 > [enter password]: pg01
+> 
 > [repeate]: pg01
 >
 > \q
+> 
 > exit
 
 # Implantar o banco da API
