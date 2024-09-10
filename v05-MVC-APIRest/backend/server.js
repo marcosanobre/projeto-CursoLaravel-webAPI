@@ -40,12 +40,18 @@ db.sequelize.sync({ force: true }).then(() => {
 });
 */
 
-/* 
-// simple test route
-app.get("/testeAPI", (req, res) => {
-  res.json({ message: "Rota de Teste da API." });
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
-*/
+
+
+
+
+
+
+
 
 // *****************************************************************
 // GRUPOS
@@ -74,48 +80,46 @@ app.get('/grupo/:id_grupo', async ( req, res) => {
 */
 
 
-
 // *****************************************************************
 // VIDEOS
 // *****************************************************************
 
+/* 
 // get Video BY ID
 app.get('/video/:id_video', async ( req, res ) => {
   try {
       const idVideo = Number( req.params.id_video );
       const video = await db.video_curso.findByPk( idVideo );
-      /* 
+      // 
       const dbConn = await conexao();
       const query = `SELECT * FROM video_curso WHERE id = ${idVideo};`;
       const { rows } = await dbConn.query( query );
-      */
+      //
       res.status(200).json(video);
   } catch (err) {
       console.error(err);
       res.status(500).send( `Problemas ao obter dados do Video (${idVideo}).` );
   }
 });
+*/
 
+/* 
 // get Videos do GRUPO
 app.get('/videos/:id_grupo', async ( req, res ) => {
   try {
     const id_grupo = Number(req.params.id_grupo);
     const videos = await db.video_curso.findAll( { where: { id_grupo: `${id_grupo}`}, order: [['titulo', 'DESC']] } );
-    /* 
+    // 
     const dbConn = await conexao();
     const query = `SELECT * FROM video_curso WHERE id_grupo = ${id_grupo} ORDER BY id ASC`;
     const { rows } = await dbConn.query( query );
-    */
+    //
     res.status(200).json(videos);
   } catch (err) {
     console.error(err);
     res.status(500).send( `Problemas ao obter dados dos Videos do Grupo(${id_grupo}).` );
   }
 });
+*/
 
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});

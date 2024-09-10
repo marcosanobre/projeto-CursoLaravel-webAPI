@@ -1,4 +1,3 @@
-//import bd from "../models/index.js";
 const db = require("../models/index.js");
 
 class GruposController {
