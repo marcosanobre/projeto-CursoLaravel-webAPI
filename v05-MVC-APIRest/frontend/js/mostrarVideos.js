@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // ( equivalente a uma MODEL::GRUPOS )
 // -----------------------------------------------------------------
 function getGrupos() {
-    const urlFetchGrupos = 'http://127.0.0.1:3000/grupos';
+    const urlFetchGrupos = commonLib.API_URL_PORT + '/grupos';
+console.log(urlFetchGrupos);
+
     fetch(urlFetchGrupos)
         .then( (response) => {
                 return response.json();
@@ -55,7 +57,7 @@ function getVideosDoGrupo(evento) {
     const link2InsereVideo = document.getElementById("link_2_insertVideo");
     link2InsereVideo.href = `./pages/inserir-video.html?gid=${idGrupoSelecionado}`
     // Pega os Videos
-    const urlFetchVideos = `http://127.0.0.1:3000/videos/${idGrupoSelecionado}`;
+    const urlFetchVideos = commonLib.API_URL_PORT + `/videosDoGrupo/${idGrupoSelecionado}`;
     fetch(urlFetchVideos)
         .then( (response) => {
                 return response.json();

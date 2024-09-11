@@ -1,3 +1,6 @@
+const API_URL_PORT = 'http://localhost:8080';
+const APP_URL_PORT = 'http://localhost:5500';
+
 function defineImagem( grupoSelecionado ) {
     const ret = (grupoSelecionado==1) ? 'url(../img/cabecalho/RonaldoAires.jpg)' : 
                 (grupoSelecionado==2) ? 'url(../img/cabecalho/ThiagoMatos.jpg)' : 
@@ -14,8 +17,8 @@ function constroiCard( id, titulo, descricao, url, imagem ) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
         <div class="video-acoes__container">
-            <a class="link-acoes" href="http://127.0.0.1:5500/pages/excluir-video.html?exc=${id}">Exclui</a>
-            <a class="link-acoes" href="http://127.0.0.1:5500/pages/alterar-video.html?alt=${id}">Altera</a>
+            <a class="link-acoes" href="${APP_URL_PORT}/pages/excluir-video.html?exc=${id}">Exclui</a>
+            <a class="link-acoes" href="${APP_URL_PORT}/pages/alterar-video.html?alt=${id}">Altera</a>
         </div>
         <div class="descricao-video">
             <img src="${imagem}" alt="logo canal alura">
@@ -65,7 +68,7 @@ function carregaVideos( lista, videos ) {
     };
 };
 
-export { carregaVideos, carregaComboBoxGrupos, constroiCard, defineImagem };
+export { API_URL_PORT, APP_URL_PORT, carregaVideos, carregaComboBoxGrupos, constroiCard, defineImagem };
 
 
 

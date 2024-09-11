@@ -27,7 +27,7 @@ class VideoCursoController {
     static async getAllVideosDoGrupo( req, res ) {
         try {
             const id_grupo = Number(req.params.id_grupo);
-            const videos = await db.video_curso.findAll( { where: { id_grupo: `${id_grupo}`}, order: [['titulo', 'ASC']] } );
+            const videos = await db.video_curso.findAll( { where: { id_grupo: `${id_grupo}`}, order: [['id_grupo', 'ASC']] } ); //, ['titulo', 'ASC']
             res.status(200).json(videos);
         } catch (err) {
             const id_video = req.params.id_video;

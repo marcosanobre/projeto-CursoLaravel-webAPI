@@ -8,14 +8,14 @@ import * as commonLib from "./comum.js";
 //const {baseData} = require('./mostrarVideos.js');
 
 function grupoSelecionado( idGrupo ) {
-    const urlFetchGrupo = `http://127.0.0.1:3000/grupo/${idGrupo}`;
+    const urlFetchGrupo = commonLib.API_URL_PORT + `/grupo/${idGrupo}`;
     fetch(urlFetchGrupo)
         .then( (response) => {
                 return response.json();
         })
         .then( (grupo) => {
             const labelGrupo = document.getElementById("grupo_selecionado");
-            labelGrupo.innerHTML = grupo[0].titulo;
+            labelGrupo.innerHTML = grupo.titulo;
             document.getElementById('imagem_grupo').style.backgroundImage = commonLib.defineImagem(idGrupo);
         })
         .catch(function() {
