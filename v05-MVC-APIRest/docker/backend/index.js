@@ -152,7 +152,7 @@ app.post('/video/:id_grupo', async ( req, res ) => {
         res.sendStatus(201);
     } catch (err) {
         console.error(err);
-        res.status(500).send( `Problemas ao gravar dados de Video do Grupo(${id_grupo}).` );
+        res.status(500).send( `Problemas ao inserir dados de Video do Grupo(${id_grupo}).` );
     }
 });
 
